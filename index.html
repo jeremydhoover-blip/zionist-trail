@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Zionist Trail - Journey to Eretz Yisrael</title>
+    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="css/retro-ui.css"/>
+  </head>
+  <body>
+    <!-- Fixed Game Container with Dynamic Backgrounds -->
+    <div id="game-container" class="location-warsaw">
+      
+      <!-- Intro/Title Screen -->
+      <div id="title-screen" class="overlay active">
+        <div class="title-content">
+          <div class="title-cover-image">
+            <img src="images/cover.png" alt="Zionist Trail" class="cover-image">
+          </div>
+          <button id="start-game-btn" class="menu-btn">Start Your Journey</button>
+          <button id="load-game-btn" class="menu-btn secondary" style="display:none;">Continue Journey</button>
+          <div class="historical-note">
+            Experience the challenges and triumphs of the First and Second Aliyah pioneers
+          </div>
+        </div>
+      </div>
+
+      <!-- Introduction Story Screen -->
+      <div id="introduction-story" class="overlay">
+        <div class="overlay-content story-screen">
+          <div class="story-header">
+            <div class="pixel-art-scene poland-scene"></div>
+            <h2>The Year is 1909</h2>
+          </div>
+          <div class="story-text">
+            <p>You are living in the Pale of Settlement in Poland, under the oppressive rule of the Russian Empire. Anti-Jewish pogroms are becoming more frequent and violent.</p>
+            
+            <p>Inspired by the Zionist movement and the writings of Leon Pinsker and Theodor Herzl, you have decided to join other Jewish pioneers in making Aliyah to Eretz Yisrael (the Land of Israel).</p>
+            
+            <p>Your destination is to establish a new settlement in Ottoman Palestine.</p>
+            
+            <p>The journey will be dangerous, expensive, and difficult. Many have tried before - some succeeded, others perished along the way.</p>
+          </div>
+          <button id="continue-to-profession" class="retro-btn primary">Choose Your Character</button>
+        </div>
+      </div>
+
+      <!-- Character Selection Overlay -->
+      <div id="character-selection" class="overlay">
+        <div class="overlay-content">
+          <button class="back-btn grid-overlay" onclick="goBackToIntroduction()">Back</button>
+          <h2>Choose Your Character</h2>
+          <p>Select which pioneer will lead your journey to Eretz Yisrael</p>
+          
+          <div class="profession-cards">
+            <div class="profession-card" data-profession="INTELLECTUAL">
+              <div class="character-portrait">
+                <img src="images/character-portraits-elizier-ben-yehuda.png" alt="Eliezer Ben-Yehuda" />
+              </div>
+              <h3>Eliezer Ben-Yehuda</h3>
+              <p class="character-title">Hebrew Scholar & Writer</p>
+              <p>Devoted to reviving Hebrew as a spoken language</p>
+              <div class="resources"><span title="Starting Money (Rubles)"><img src="images/resource-icons-money.png" class="ri" alt="Money">400</span> <span title="Food (lbs)"><img src="images/resource-icons-food.png" class="ri" alt="Food">300</span> <span title="Tools"><img src="images/resource-icons-tools.png" class="ri" alt="Tools">1</span> <span title="Medicine"><img src="images/resource-icons-medicine.png" class="ri" alt="Medicine">3</span></div>
+              <div class="special">+Leadership & Education bonuses</div>
+            </div>
+            
+            <div class="profession-card" data-profession="CRAFTSMAN">
+              <div class="character-portrait">
+                <img src="images/charcter-portraits-yaakov-the-builder.png" alt="Yaakov the Builder" />
+              </div>
+              <h3>Yaakov the Builder</h3>
+              <p class="character-title">Master Craftsman</p>
+              <p>Skilled carpenter and stonemason from Vilna</p>
+              <div class="resources"><span title="Starting Money (Rubles)"><img src="images/resource-icons-money.png" class="ri" alt="Money">250</span> <span title="Food (lbs)"><img src="images/resource-icons-food.png" class="ri" alt="Food">400</span> <span title="Tools"><img src="images/resource-icons-tools.png" class="ri" alt="Tools">4</span> <span title="Medicine"><img src="images/resource-icons-medicine.png" class="ri" alt="Medicine">2</span></div>
+              <div class="special">+Farming & Building bonuses</div>
+            </div>
+            
+            <div class="profession-card" data-profession="MERCHANT">
+              <div class="character-portrait">
+                <img src="images/character-portraits-morechai-goldberg-merchant.png" alt="Mordechai Goldberg" />
+              </div>
+              <h3>Mordechai Goldberg</h3>
+              <p class="character-title">Wealthy Merchant</p>
+              <p>International trader with Ottoman connections</p>
+              <div class="resources"><span title="Starting Money (Rubles)"><img src="images/resource-icons-money.png" class="ri" alt="Money">600</span> <span title="Food (lbs)"><img src="images/resource-icons-food.png" class="ri" alt="Food">200</span> <span title="Tools"><img src="images/resource-icons-tools.png" class="ri" alt="Tools">2</span> <span title="Medicine"><img src="images/resource-icons-medicine.png" class="ri" alt="Medicine">2</span></div>
+              <div class="special">+Trading discounts & Commerce</div>
+            </div>
+            
+            <div class="profession-card" data-profession="RELIGIOUS_SCHOLAR">
+              <div class="character-portrait">
+                <img src="images/charcter-portraits-rabbi-shmuel.png" alt="Rabbi Shmuel Mohilever" />
+              </div>
+              <h3>Rabbi Shmuel Mohilever</h3>
+              <p class="character-title">Zionist Leader</p>
+              <p>Founder of Hibbat Zion movement</p>
+              <div class="resources"><span title="Starting Money (Rubles)"><img src="images/resource-icons-money.png" class="ri" alt="Money">300</span> <span title="Food (lbs)"><img src="images/resource-icons-food.png" class="ri" alt="Food">350</span> <span title="Tools"><img src="images/resource-icons-tools.png" class="ri" alt="Tools">2</span> <span title="Medicine"><img src="images/resource-icons-medicine.png" class="ri" alt="Medicine">3</span></div>
+              <div class="special">+Morale & Settlement bonuses</div>
+            </div>
+            
+            <div class="profession-card" data-profession="FORMER_FARMER">
+              <div class="character-portrait">
+                <img src="images/charcter-portraits-avraham-farmer.png" alt="Avraham the Farmer" />
+              </div>
+              <h3>Avraham the Farmer</h3>
+              <p class="character-title">Agricultural Pioneer</p>
+              <p>Expert in crop cultivation and livestock</p>
+              <div class="resources"><span title="Starting Money (Rubles)"><img src="images/resource-icons-money.png" class="ri" alt="Money">200</span> <span title="Food (lbs)"><img src="images/resource-icons-food.png" class="ri" alt="Food">500</span> <span title="Tools"><img src="images/resource-icons-tools.png" class="ri" alt="Tools">3</span> <span title="Medicine"><img src="images/resource-icons-medicine.png" class="ri" alt="Medicine">1</span></div>
+              <div class="special">+Food production & Survival</div>
+            </div>
+            
+            <div class="profession-card" data-profession="NURSE">
+              <div class="character-portrait">
+                <img src="images/character-portraits-sofie-stern.png" alt="Sofie Stern" />
+              </div>
+              <h3>Sofie Stern</h3>
+              <p class="character-title">Medical Pioneer</p>
+              <p>Trained nurse dedicated to healing the sick</p>
+              <div class="resources"><span title="Starting Money (Rubles)"><img src="images/resource-icons-money.png" class="ri" alt="Money">350</span> <span title="Food (lbs)"><img src="images/resource-icons-food.png" class="ri" alt="Food">300</span> <span title="Tools"><img src="images/resource-icons-tools.png" class="ri" alt="Tools">1</span> <span title="Medicine"><img src="images/resource-icons-medicine.png" class="ri" alt="Medicine">5</span></div>
+              <div class="special">+Medical care & Disease prevention</div>
+            </div>
+            
+            <div class="profession-card" data-profession="TEACHER">
+              <div class="character-portrait">
+                <img src="images/character-portraits-miriam-goldstein.png" alt="Miriam Goldstein" />
+              </div>
+              <h3>Miriam Goldstein</h3>
+              <p class="character-title">Educator & Scholar</p>
+              <p>Devoted to teaching Hebrew and Jewish history</p>
+              <div class="resources"><span title="Starting Money (Rubles)"><img src="images/resource-icons-money.png" class="ri" alt="Money">300</span> <span title="Food (lbs)"><img src="images/resource-icons-food.png" class="ri" alt="Food">350</span> <span title="Tools"><img src="images/resource-icons-tools.png" class="ri" alt="Tools">2</span> <span title="Medicine"><img src="images/resource-icons-medicine.png" class="ri" alt="Medicine">3</span></div>
+              <div class="special">+Education & Cultural preservation</div>
+            </div>
+            
+            <div class="profession-card" data-profession="CHILD">
+              <div class="character-portrait">
+                <img src="images/character-portraits-mia.png" alt="Mia Hoover" />
+              </div>
+              <h3>Mia Hoover</h3>
+              <p class="character-title">Young Pioneer</p>
+              <p>Brave child seeking adventure and new opportunities</p>
+              <div class="resources"><span title="Starting Money (Rubles)"><img src="images/resource-icons-money.png" class="ri" alt="Money">150</span> <span title="Food (lbs)"><img src="images/resource-icons-food.png" class="ri" alt="Food">250</span> <span title="Tools"><img src="images/resource-icons-tools.png" class="ri" alt="Tools">1</span> <span title="Medicine"><img src="images/resource-icons-medicine.png" class="ri" alt="Medicine">2</span></div>
+              <div class="special">+Hope & Community spirit</div>
+            </div>
+          </div>
+          
+          <div class="selection-actions">
+            <button id="confirm-profession" class="retro-btn primary" disabled>Continue to Party Selection</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Warsaw Family Scene (for Mia Hoover) -->
+      <div id="warsaw-family-scene" class="overlay scene-warsaw-family">
+        <div class="overlay-content story-screen">
+          <button class="back-btn family-overlay" onclick="goBackToCharacterSelection()">Back</button>
+          <div class="story-header">
+            <h2>The Hoover Family - Warsaw, 1909</h2>
+          </div>
+          
+          <!-- Family Portraits Section -->
+          <div class="family-portraits-section">
+            <div class="family-portraits-grid">
+              <div class="family-member">
+                <div class="family-portrait">
+                  <img src="images/grandmother.png" alt="Hannah Rubinstein" />
+                </div>
+                <h4>Hannah Rubinstein</h4>
+                <p>Grandmother</p>
+              </div>
+              
+              <div class="family-member">
+                <div class="family-portrait">
+                  <img src="images/grandfather.png" alt="Tzvika Rubinstein" />
+                </div>
+                <h4>Tzvika Rubinstein</h4>
+                <p>Grandfather</p>
+              </div>
+              
+              <div class="family-member">
+                <div class="family-portrait">
+                  <img src="images/father.png" alt="Jeremy Hoover" />
+                </div>
+                <h4>Jeremy Hoover</h4>
+                <p>Father</p>
+              </div>
+              
+              <div class="family-member">
+                <div class="family-portrait">
+                  <img src="images/mother.png" alt="Tali Hoover" />
+                </div>
+                <h4>Tali Hoover</h4>
+                <p>Mother</p>
+              </div>
+              
+              <div class="family-member">
+                <div class="family-portrait">
+                  <img src="images/iris.png" alt="Iris Goldstein" />
+                </div>
+                <h4>Iris Goldstein</h4>
+                <p>Community Helper</p>
+              </div>
+              
+              <div class="family-member">
+                <div class="family-portrait">
+                  <img src="images/chaim.png" alt="Chaim Goldstein" />
+                </div>
+                <h4>Chaim Goldstein</h4>
+                <p>Resourceful Scrounger</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="story-text">
+            <p><strong>Little Mia Hoover</strong> sits in the cramped apartment in Warsaw's Jewish Quarter, surrounded by her loving family as they prepare for the most important decision of their lives.</p>
+            
+            <p>Her <strong>grandmother Hannah Rubinstein</strong> carefully packs precious family heirlooms, whispering old prayers. <strong>Grandfather Tzvika Rubinstein</strong> studies maps of the Holy Land with weathered fingers that have seen too much hardship.</p>
+            
+            <p><strong>Papa Jeremy</strong> counts their meager savings while <strong>Mama Tali</strong> mends their traveling clothes by candlelight. The neighbors <strong>Iris Goldstein</strong> and <strong>Chaim Goldstein</strong> have also decided to join them - together, they will face the unknown.</p>
+            
+            <p>The pogroms are getting worse. The family knows they must leave everything behind for a chance at freedom in Eretz Yisrael. But who will make this dangerous journey with brave little Mia?</p>
+          </div>
+          <button id="continue-to-party-selection" class="retro-btn primary">Choose Your Travel Companions</button>
+        </div>
+      </div>
+
+      <!-- Enhanced Party Selection Screen -->
+      <div id="enhanced-party-selection" class="overlay">
+        <div class="overlay-content">
+          <button class="back-btn grid-overlay" onclick="goBackToCharacterSelection()">Back</button>
+          <h2 id="party-selection-title">Choose Your Traveling Companions</h2>
+          
+          <div class="party-selection-info">
+            <div class="selection-status" id="selection-status">Select 5 companions from 6 candidates</div>
+            <div class="selection-instructions">Select 5 companions to join your journey. Each has unique abilities that could save your life!</div>
+          </div>
+          
+          <div class="party-selection-grid" id="party-candidates">
+            <!-- Dynamic party candidates will be inserted here -->
+          </div>
+          
+          <div class="selection-actions">
+            <button id="confirm-party-selection" class="retro-btn primary" disabled>Continue with Selected Companions</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Meet Your Party Screen -->
+      <div id="meet-party" class="overlay">
+        <div class="overlay-content">
+          <button class="back-btn" onclick="goBackToPartySelection()">Back</button>
+          <h2>Meet Your Traveling Companions</h2>
+          <p>These brave pioneers will accompany you on the journey:</p>
+          
+          <div class="party-members">
+            <div class="party-member">
+              <div class="member-portrait male-portrait"></div>
+              <div class="member-info">
+                <h4 id="member1-name">Avraham Cohen</h4>
+                <p id="member1-profession">Carpenter</p>
+                <div class="health-bar"><div class="health-fill"></div></div>
+              </div>
+            </div>
+            
+            <div class="party-member">
+              <div class="member-portrait female-portrait"></div>
+              <div class="member-info">
+                <h4 id="member2-name">Sarah Goldstein</h4>
+                <p id="member2-profession">Teacher</p>
+                <div class="health-bar"><div class="health-fill"></div></div>
+              </div>
+            </div>
+            
+            <div class="party-member">
+              <div class="member-portrait male-portrait"></div>
+              <div class="member-info">
+                <h4 id="member3-name">Moshe Rosenberg</h4>
+                <p id="member3-profession">Farmer</p>
+                <div class="health-bar"><div class="health-fill"></div></div>
+              </div>
+            </div>
+            
+            <div class="party-member">
+              <div class="member-portrait female-portrait"></div>
+              <div class="member-info">
+                <h4 id="member4-name">Rebecca Weiss</h4>
+                <p id="member4-profession">Nurse</p>
+                <div class="health-bar"><div class="health-fill"></div></div>
+              </div>
+            </div>
+            
+            <div class="party-member">
+              <div class="member-portrait male-portrait"></div>
+              <div class="member-info">
+                <h4 id="member5-name">David Katz</h4>
+                <p id="member5-profession">Merchant</p>
+                <div class="health-bar"><div class="health-fill"></div></div>
+              </div>
+            </div>
+          </div>
+          
+          <button id="continue-to-supplies" class="retro-btn primary">Confirm</button>
+        </div>
+      </div>
+
+      <!-- Initial Supply Purchase Screen -->
+      <div id="initial-supplies" class="overlay" style="background:url('images/warsaw-market.png') center/cover no-repeat; background-color:rgba(0,0,0,0.7); background-blend-mode:darken;">
+        <div class="overlay-content" style="background:rgba(10,8,4,0.88);backdrop-filter:blur(10px);max-width:1200px;width:90vw;">
+          <h2>Goldstein's General Store - Warsaw</h2>
+          <p>Purchase supplies wisely - your survival depends on it!</p>
+          
+          <div class="supply-shop">
+            <div id="current-supplies-display" style="background:rgba(255,215,0,0.08);border:1px solid var(--border-color);border-radius:10px;padding:1rem;margin-bottom:1rem;text-align:center;">
+              <h3 style="color:var(--text-accent);margin-bottom:0.5rem;font-size:1.1rem;">Current Supplies</h3>
+              <div style="display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;font-size:1rem;">
+                <span><img src="images/resource-icons-food.png" class="ri" alt=""> Food: <strong id="current-food">0</strong></span>
+                <span><img src="images/resource-icons-water.png" class="ri" alt=""> Water: <strong id="current-water">0</strong></span>
+                <span><img src="images/resource-icons-tools.png" class="ri" alt=""> Tools: <strong id="current-tools">0</strong></span>
+                <span><img src="images/resource-icons-medicine.png" class="ri" alt=""> Medicine: <strong id="current-medicine">0</strong></span>
+                <span><img src="images/resource-icons-clothing.png" class="ri" alt=""> Clothing: <strong id="current-clothing">0</strong></span>
+              </div>
+            </div>
+            <div class="money-display">
+              <h3>Available Funds: <span id="available-money">400</span> rubles</h3>
+            </div>
+            
+            <div class="shop-items">
+              <div class="shop-item">
+                <div class="item-icon"><img src="images/resource-icons-food.png" class="ri-lg" alt="Food"></div>
+                <div class="item-info">
+                  <h4>Food (per 20 lbs)</h4>
+                  <p>Essential for survival</p>
+                  <div class="price">10 rubles</div>
+                  <div class="quantity-controls">
+                    <button class="qty-btn" data-item="food" data-action="decrease">-</button>
+                    <span class="qty-display" id="food-qty">20</span>
+                    <button class="qty-btn" data-item="food" data-action="increase">+</button>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="shop-item">
+                <div class="item-icon"><img src="images/resource-icons-tools.png" class="ri-lg" alt="Tools"></div>
+                <div class="item-info">
+                  <h4>Tools</h4>
+                  <p>For building and repairs</p>
+                  <div class="price">50 rubles</div>
+                  <div class="quantity-controls">
+                    <button class="qty-btn" data-item="tools" data-action="decrease">-</button>
+                    <span class="qty-display" id="tools-qty">1</span>
+                    <button class="qty-btn" data-item="tools" data-action="increase">+</button>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="shop-item">
+                <div class="item-icon"><img src="images/resource-icons-medicine.png" class="ri-lg" alt="Medicine"></div>
+                <div class="item-info">
+                  <h4>Medicine</h4>
+                  <p>Treats disease and injury</p>
+                  <div class="price">25 rubles</div>
+                  <div class="quantity-controls">
+                    <button class="qty-btn" data-item="medicine" data-action="decrease">-</button>
+                    <span class="qty-display" id="medicine-qty">2</span>
+                    <button class="qty-btn" data-item="medicine" data-action="increase">+</button>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="shop-item">
+                <div class="item-icon"><img src="images/resource-icons-clothing.png" class="ri-lg" alt="Clothing"></div>
+                <div class="item-info">
+                  <h4>Clothing</h4>
+                  <p>Protection from weather</p>
+                  <div class="price">15 rubles</div>
+                  <div class="quantity-controls">
+                    <button class="qty-btn" data-item="clothing" data-action="decrease">-</button>
+                    <span class="qty-display" id="clothing-qty">1</span>
+                    <button class="qty-btn" data-item="clothing" data-action="increase">+</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="purchase-summary">
+              <h4>Total Cost: <span id="total-cost">135</span> rubles</h4>
+              <h4>Remaining: <span id="remaining-money">265</span> rubles</h4>
+            </div>
+          </div>
+          
+          <button id="finalize-supplies" class="retro-btn primary">Begin Journey</button>
+        </div>
+      </div>
+
+      <!-- Main Game Interface - Three-Section Layout -->
+      <div id="main-game" class="main-game-container">
+        
+        <!-- TOP SECTION: Visual/Graphical Area (70%) - Oregon Trail Style Viewport -->
+        <div id="game-visual-area" class="visual-section">
+          <!-- Ornate Retro Frame Container -->
+          <div id="ornate-viewport-frame" class="ornate-frame">
+            <!-- Frame Decorations -->
+            <div class="frame-corner frame-corner-tl"></div>
+            <div class="frame-corner frame-corner-tr"></div>
+            <div class="frame-corner frame-corner-bl"></div>
+            <div class="frame-corner frame-corner-br"></div>
+            <div class="frame-border frame-border-top"></div>
+            <div class="frame-border frame-border-right"></div>
+            <div class="frame-border frame-border-bottom"></div>
+            <div class="frame-border frame-border-left"></div>
+            
+            <!-- Main Viewport Content -->
+            <div id="historical-viewport" class="historical-viewport">
+              <!-- Dynamic Background (Full Coverage) -->
+              <div id="location-background" class="location-bg-fullscreen">
+                <div id="weather-effects" class="weather-overlay"></div>
+                <div id="time-effects" class="time-overlay"></div>
+              </div>
+              
+              <!-- Location Title Card - Ornate Style -->
+              <div id="location-title-card" class="ornate-location-card">
+                <div class="card-decoration card-decoration-left"></div>
+                <div class="card-content">
+                  <h2 id="location-title">Warsaw, Poland</h2>
+                  <p id="location-subtitle">Preparing to depart for Eretz Yisrael</p>
+                </div>
+                <div class="card-decoration card-decoration-right"></div>
+              </div>
+
+              <!-- Day/Status HUD overlay -->
+              <div id="viewport-hud" class="viewport-hud">
+                <span id="hud-day" class="hud-item">Day 1</span>
+                <span id="hud-weather" class="hud-item"><img id="hud-weather-icon" src="images/weather-icons-sun.png" class="ri" alt=""> Fair</span>
+                <span id="hud-health" class="hud-item"><img src="images/resource-icons-health.png" class="ri" alt=""> Good</span>
+              </div>
+              
+              <!-- Integrated Party Display -->
+              <div id="integrated-party-display" class="party-in-scene" style="display:none;">
+                <div id="group-travel-sprite" class="group-sprite">
+                  <img src="images/party-walking.png" alt="Travel Party" id="party-group-image" />
+                </div>
+                <div id="party-status-portraits" class="party-portraits-row"></div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Visual Overlay Container for Activities & Mini-Games -->
+          <div id="visual-overlay-container" class="overlay-container">
+            
+            <!-- Default: Travel Scene Overlay -->
+            <div id="travel-overlay" class="visual-overlay active">
+              <!-- Party sprite container that matches DailyDecision.js expectations -->
+              <div id="travel-party-container" class="party-sprite">
+                <img src="images/party-walking.png" alt="Travel Party" id="party-image" />
+                <div id="party-status-indicators">
+                  <div class="status-indicator health-indicator"></div>
+                  <div class="status-indicator morale-indicator"></div>
+                </div>
+              </div>
+              
+              <!-- Location-specific interactive elements -->
+              <div id="interactive-elements">
+                <div id="location-hotspots"></div>
+                <div id="mini-animations"></div>
+              </div>
+            </div>
+            
+            <!-- Warsaw Activity Overlay -->
+            <div id="warsaw-activity-overlay" class="visual-overlay">
+              <div class="activity-scene warsaw-preparation">
+                <div class="activity-header">
+                  <h3>Prepare to Emigrate from Warsaw</h3>
+                  <div class="activity-progress">Preparation Progress: 0/3 tasks completed</div>
+                </div>
+                
+                <div class="activity-content">
+                  <div class="preparation-scene">
+                    <div class="apartment-view">
+                      <img src="images/warsaw.png" alt="Warsaw Apartment" class="scene-background" />
+                      <div class="family-preparing">
+                        <div class="activity-characters">
+                          <div class="character-activity packing">
+                            <div class="character-sprite"></div>
+                            <div class="activity-bubble">Packing belongings...</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="mini-game-triggers">
+                      <button class="minigame-trigger" data-minigame="packWagon" data-game-title="Pack Your Wagon">
+                        <div class="trigger-icon">Pack</div>
+                        <div class="trigger-text">
+                          <h4>Pack Your Wagon</h4>
+                          <p>Arrange belongings efficiently</p>
+                        </div>
+                      </button>
+                      
+                      <button class="minigame-trigger" data-minigame="convinceFamily" data-game-title="Convince Family">
+                        <div class="trigger-icon">Talk</div>
+                        <div class="trigger-text">
+                          <h4>Convince Family to Join</h4>
+                          <p>Persuade hesitant relatives</p>
+                        </div>
+                      </button>
+                      
+                      <button class="minigame-trigger" data-minigame="escapePaperwork" data-game-title="Escape Paperwork">
+                        <div class="trigger-icon">Docs</div>
+                        <div class="trigger-text">
+                          <h4>Escape Paperwork Mix-up</h4>
+                          <p>Solve bureaucratic puzzle</p>
+                        </div>
+                      </button>
+                    </div>
+                  </div>
+                  
+                  <div class="activity-controls">
+                    <button class="retro-btn secondary" onclick="window.ZionistH.visualOverlayManager.showTravelScene()">
+                      Back to Journey
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Mini-Game Overlay (Dynamic Content) -->
+            <div id="minigame-overlay" class="visual-overlay">
+              <!-- Mini-game content will be loaded dynamically -->
+            </div>
+            
+            <!-- Placeholder overlays for future locations -->
+            <div id="vienna-activity-overlay" class="visual-overlay">
+              <div class="activity-scene vienna-transition">
+                <h3>Vienna Train Station</h3>
+                <p>Activity implementation coming soon...</p>
+              </div>
+            </div>
+
+            
+          </div>
+          
+          <!-- Location Info Banner -->
+          <div id="location-info-banner">
+            <h2 id="current-location-name">Warsaw, Poland</h2>
+            <p id="location-description">Preparing to depart for Eretz Yisrael</p>
+          </div>
+        </div>
+
+        <!-- Route Progress Strip — between visual and event sections -->
+        <div id="route-progress-strip" class="route-strip">
+          <div id="route-line" class="route-line"></div>
+          <div id="route-stops" class="route-stops"></div>
+          <img id="route-party-icon" class="route-party-icon" src="images/party-walking.png" alt="Party" />
+        </div>
+
+        <!-- MIDDLE SECTION: Event/Decision Area (40%) -->
+        <div id="game-event-area" class="event-section">
+          <div id="daily-event-content" class="event-content">
+            <div id="event-header">
+              <h3 id="event-title">Day 1 - What do you want to do?</h3>
+            </div>
+            
+            <div id="event-description" class="event-text">
+              <p>The sun rises over Warsaw. Your party is ready to begin the journey to Eretz Yisrael. What is your first action?</p>
+            </div>
+            
+            <div id="event-warnings" class="warnings-display">
+              <!-- Resource warnings will appear here -->
+            </div>
+          </div>
+          
+          <div class="choices-container">
+            <!-- Dynamic choice buttons will appear here -->
+          </div>
+        </div>
+
+        <!-- BOTTOM SECTION: Control Panel (10%) -->
+        <div id="game-control-panel" class="control-section">
+          <!-- Compact Status Display -->
+          <div id="status-display" class="status-bar">
+            <div class="status-item" title="Current day of journey">
+              <span class="status-icon"><img src="images/resource-icons-day.png" class="ri" alt="Day"></span>
+              <span id="display-day">1</span>
+            </div>
+            <div class="status-item" title="Party health status">
+              <span class="status-icon" id="status-health-icon"><img src="images/resource-icons-health.png" class="ri" alt="Health"></span>
+              <span id="display-health">Good</span>
+            </div>
+            <div class="status-item" title="Food remaining (lbs)">
+              <span class="status-icon"><img src="images/resource-icons-food.png" class="ri" alt="Food"></span>
+              <span id="display-food">0</span>
+            </div>
+            <div class="status-item" title="Water remaining (gallons)">
+              <span class="status-icon"><img src="images/resource-icons-water.png" class="ri" alt="Water"></span>
+              <span id="display-water">0</span>
+            </div>
+            <div class="status-item" title="Money (rubles)">
+              <span class="status-icon"><img src="images/resource-icons-money.png" class="ri" alt="Money"></span>
+              <span id="display-money">0</span>
+            </div>
+          </div>
+          
+          <!-- Save / Load / New Game Buttons -->
+          <div id="action-buttons" class="action-bar">
+            <button id="save-game-btn" class="control-btn" title="Save game">
+              <span class="btn-text">Save</span>
+            </button>
+            <button id="load-ingame-btn" class="control-btn" title="Load saved game">
+              <span class="btn-text">Load</span>
+            </button>
+            <button id="new-game-btn" class="control-btn" title="Start new game">
+              <span class="btn-text">New</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Supplies Overlay -->
+      <div id="supplies-overlay" class="overlay">
+        <div class="overlay-content">
+          <h2>Supplies Inventory</h2>
+          <div class="supplies-grid">
+            <div class="supply-item">
+              <div class="supply-icon"><img src="images/resource-icons-food.png" class="ri-lg" alt="Food"></div>
+              <div class="supply-info">
+                <div class="supply-name">Food</div>
+                <div class="supply-amount" id="supply-food">500 lbs</div>
+              </div>
+            </div>
+            <div class="supply-item">
+              <div class="supply-icon"><img src="images/resource-icons-water.png" class="ri-lg" alt="Water"></div>
+              <div class="supply-info">
+                <div class="supply-name">Water</div>
+                <div class="supply-amount" id="supply-water">200 gal</div>
+              </div>
+            </div>
+            <div class="supply-item">
+              <div class="supply-icon"><img src="images/resource-icons-tools.png" class="ri-lg" alt="Tools"></div>
+              <div class="supply-info">
+                <div class="supply-name">Tools</div>
+                <div class="supply-amount" id="supply-tools">2</div>
+              </div>
+            </div>
+            <div class="supply-item">
+              <div class="supply-icon"><img src="images/resource-icons-medicine.png" class="ri-lg" alt="Medicine"></div>
+              <div class="supply-info">
+                <div class="supply-name">Medicine</div>
+                <div class="supply-amount" id="supply-medicine">3</div>
+              </div>
+            </div>
+            <div class="supply-item">
+              <div class="supply-icon"><img src="images/resource-icons-money.png" class="ri-lg" alt="Money"></div>
+              <div class="supply-info">
+                <div class="supply-name">Money</div>
+                <div class="supply-amount" id="supply-money">400 rubles</div>
+              </div>
+            </div>
+            <div class="supply-item">
+              <div class="supply-icon"><img src="images/resource-icons-party.png" class="ri-lg" alt="Pioneers"></div>
+              <div class="supply-info">
+                <div class="supply-name">Pioneers</div>
+                <div class="supply-amount" id="supply-pioneers">30</div>
+              </div>
+            </div>
+          </div>
+          <button class="close-btn" onclick="closeOverlay('supplies-overlay')">Continue Journey</button>
+        </div>
+      </div>
+
+      <!-- Pace & Rations Selection Overlay -->
+      <div id="pace-overlay" class="overlay">
+        <div class="overlay-content">
+          <h2>Set Travel Pace</h2>
+          <div class="pace-options">
+            <div class="pace-option" data-pace="slow">
+              <h3>Slow Pace</h3>
+              <p>Safest for health, uses less food, but slower progress</p>
+            </div>
+            <div class="pace-option active" data-pace="normal">
+              <h3>Normal Pace</h3>
+              <p>Balanced approach - moderate speed and resource use</p>
+            </div>
+            <div class="pace-option" data-pace="fast">
+              <h3>Fast Pace</h3>
+              <p>Faster progress but risks health and uses more resources</p>
+            </div>
+          </div>
+
+          <h2 style="margin-top:1rem;">Set Rations</h2>
+          <div class="pace-options" id="rations-options">
+            <div class="ration-option" data-rations="bare">
+              <h3>Bare Bones</h3>
+              <p>Half rations — saves food but harms health &amp; morale</p>
+            </div>
+            <div class="ration-option active" data-rations="meager">
+              <h3>Meager</h3>
+              <p>Reduced rations — slightly less food, minor health risk</p>
+            </div>
+            <div class="ration-option" data-rations="filling">
+              <h3>Filling</h3>
+              <p>Full meals — best for health, uses the most food</p>
+            </div>
+          </div>
+
+          <button class="close-btn" onclick="closeOverlay('pace-overlay')">Set Pace &amp; Rations</button>
+        </div>
+      </div>
+
+      <!-- Event Overlays -->
+      <div id="event-overlay" class="overlay">
+        <div class="overlay-content">
+          <h2 id="event-title">Event</h2>
+          <div id="event-image"></div>
+          <p id="event-description">Something happens on your journey...</p>
+          <div id="event-options">
+            <!-- Dynamic event options will be inserted here -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Trading Post Overlay -->
+      <div id="trading-overlay" class="overlay">
+        <div class="overlay-content">
+          <h2 id="trading-title">Trading Post</h2>
+          <p id="trading-description">Welcome to our trading post!</p>
+          <div id="trading-goods">
+            <!-- Dynamic trading options will be inserted here -->
+          </div>
+          <button class="close-btn" onclick="closeOverlay('trading-overlay')">Leave</button>
+        </div>
+      </div>
+
+      <!-- Fishing Mini-Game Overlay -->
+      <div id="fishing-game" class="overlay">
+        <div class="overlay-content fishing-content">
+          <div class="fishing-header">
+            <h2>Mediterranean Fishing</h2>
+            <div class="fishing-stats-bar">
+              <span>Time: <span id="fishing-time">30</span>s</span>
+              <span>Catch: <span id="fish-caught">0 fish (0 lbs)</span></span>
+            </div>
+          </div>
+          
+          <div class="fishing-scene" id="fishing-scene">
+            <div class="fishing-water-area" id="fishing-water-area">
+              <!-- Fish swim here — select to catch -->
+            </div>
+            <div id="fishing-feedback" class="fishing-feedback"></div>
+          </div>
+
+          <div class="fishing-controls">
+            <button id="cast-line-btn" class="fishing-btn primary">Cast Line</button>
+            <button id="catch-fish-btn" class="fishing-btn catch-btn hidden" disabled>CATCH!</button>
+            <button id="end-fishing-btn" class="fishing-btn">End Fishing</button>
+          </div>
+
+          <div class="fishing-tip-area">
+            <p id="fishing-tip">Cast your line to begin fishing!</p>
+          </div>
+
+          <div id="fishing-summary" class="fishing-summary" style="display:none;"></div>
+        </div>
+      </div>
+
+      <!-- Foraging Mini-Game Overlay -->
+      <div id="foraging-game" class="overlay">
+        <div class="overlay-content foraging-content">
+          <div class="forage-header">
+            <h2>Wilderness Foraging</h2>
+            <div class="forage-timer"><span id="foraging-time">30</span>s</div>
+          </div>
+          <p class="forage-instructions">Select <strong>edible</strong> items — avoid <span style="color:#dc143c;">poisonous</span> ones!</p>
+
+          <div class="foraging-scene" id="foraging-scene">
+            <div id="foraging-spots" class="foraging-spots"></div>
+            <div id="forage-feedback" class="forage-feedback"></div>
+          </div>
+
+          <div class="forage-scoreboard">
+            <span><img src="images/resource-icons-food.png" class="ri" alt="Plants"> <span id="plants-found">0</span></span>
+            <span><img src="images/resource-icons-health.png" class="ri" alt="Herbs"> <span id="herbs-found">0</span></span>
+            <span><img src="images/resource-icons-water.png" class="ri" alt="Water"> <span id="water-found">0</span></span>
+            <span style="color:#dc143c;">X <span id="poison-found">0</span></span>
+          </div>
+
+          <div class="foraging-controls">
+            <button id="start-foraging-btn" class="foraging-btn primary">Start Foraging</button>
+            <button id="end-foraging-btn" class="foraging-btn">End Early</button>
+          </div>
+          <div id="forage-summary" class="forage-summary" style="display:none;"></div>
+        </div>
+      </div>
+
+    <!-- Daily Decision Overlay - Oregon Trail Style -->
+    <div id="daily-decision" class="overlay">
+      <div class="overlay-content daily-decision-content">
+        <div class="daily-header">
+          <div class="daily-status">
+            <div class="status-row">
+              <span class="status-label">Day:</span>
+              <span id="daily-day" class="status-value">1</span>
+              <span class="status-label">Location:</span>
+              <span id="daily-location" class="status-value">Warsaw</span>
+              <span class="status-label">Weather:</span>
+              <span id="daily-weather" class="status-value">Fair</span>
+            </div>
+            <div class="status-row">
+              <span class="status-label">Health:</span>
+              <span id="daily-health" class="status-value">Good</span>
+              <span class="status-label">Morale:</span>
+              <span id="daily-morale" class="status-value">Fair</span>
+            </div>
+            <div class="status-row">
+              <span class="status-label">Food:</span>
+              <span id="daily-food" class="status-value">0</span> lbs
+              <span class="status-label">Water:</span>
+              <span id="daily-water" class="status-value">0</span> gal
+              <span class="status-label">Money:</span>
+              <span id="daily-money" class="status-value">0</span> rubles
+            </div>
+          </div>
+          
+          <div class="progress-section">
+            <div class="progress-label">Progress to Jerusalem:</div>
+            <div class="progress-bar">
+              <div id="daily-progress-fill" class="progress-fill"></div>
+            </div>
+          </div>
+          
+          <div id="daily-party-status" class="party-status"></div>
+        </div>
+        
+        <div id="daily-warnings" class="warnings-section"></div>
+        
+        <div id="daily-choices" class="choices-section"></div>
+      </div>
+    </div>
+
+    <!-- Game Over Overlay -->
+    <div id="game-over" class="overlay">
+      <div class="overlay-content">
+        <h2>Your Journey Has Ended</h2>
+        <p id="game-over-message">The hardships of the trail proved too great.</p>
+        <div id="game-over-stats" class="game-over-stats">
+          <div class="stat-row"><span>Days Traveled:</span> <span id="go-days">0</span></div>
+          <div class="stat-row"><span>Distance Covered:</span> <span id="go-distance">0%</span></div>
+          <div class="stat-row"><span>Party Survivors:</span> <span id="go-survivors">0</span></div>
+          <div class="stat-row"><span>Last Location:</span> <span id="go-location">Unknown</span></div>
+        </div>
+        <p class="memorial-text" id="go-memorial"></p>
+        <button onclick="ZionistH.gameInstance.restartGame()" class="retro-btn primary">Start New Journey</button>
+      </div>
+    </div>
+      </div>
+
+      <!-- Candidate Details Modal -->
+      <div id="candidate-details-modal" class="overlay candidate-modal">
+        <div class="overlay-content modal-content">
+          <button class="modal-close-btn" onclick="closeCandidateModal()">×</button>
+          
+          <div class="modal-header">
+            <div class="modal-portrait-section">
+              <div id="modal-candidate-portrait" class="modal-portrait"></div>
+              <div id="modal-family-badge" class="modal-family-badge"></div>
+            </div>
+            <div class="modal-basic-info">
+              <h2 id="modal-candidate-name">Candidate Name</h2>
+              <div id="modal-candidate-relation" class="modal-relation">Relation</div>
+              <div id="modal-special-ability" class="modal-special-ability">
+                <strong id="modal-ability-name">Special Ability</strong>
+                <div id="modal-ability-description">Description</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-body">
+            <div class="modal-section">
+              <h3>Background Story</h3>
+              <div id="modal-backstory" class="modal-backstory"></div>
+            </div>
+
+            <div class="modal-section">
+              <h3>Skills & Abilities</h3>
+              <div id="modal-skills-grid" class="modal-skills-grid"></div>
+            </div>
+
+            <div class="modal-section">
+              <h3>Personal Goal</h3>
+              <div id="modal-goal" class="modal-goal"></div>
+            </div>
+
+            <div id="modal-relationships-section" class="modal-section" style="display: none;">
+              <h3>Family Relationships</h3>
+              <div id="modal-relationships" class="modal-relationships"></div>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button id="modal-select-btn" class="retro-btn primary">
+              Select This Companion
+            </button>
+            <button class="retro-btn" onclick="closeCandidateModal()">Close</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Victory Overlay -->
+      <div id="victory-overlay" class="overlay" style="background:url('images/jerusalem.png') center/cover no-repeat; background-color:rgba(0,0,0,0.7); background-blend-mode:darken;">
+        <div class="overlay-content" style="text-align:center;max-width:650px;max-height:90vh;overflow-y:auto;background:rgba(10,8,4,0.82);border-radius:14px;padding:1.5rem;">
+          <h1 style="color:var(--gold);font-size:2rem;margin-bottom:0.5rem;">You Have Reached Jerusalem!</h1>
+          <div class="victory-image" style="margin:1rem 0;">
+            <img src="images/western-wall.png" alt="Western Wall" style="max-width:100%;max-height:220px;border-radius:12px;border:3px solid var(--gold);box-shadow:0 0 20px rgba(218,165,32,0.4);" />
+          </div>
+          <p style="font-size:1.05rem;color:var(--text-primary);line-height:1.6;margin:0.8rem 0;">
+            Against all odds, your family has completed the journey from <strong>Warsaw</strong> to the <strong>Holy City</strong>. 
+            Through train stations and Alpine passes, across the Mediterranean Sea, past Ottoman checkpoints and the hills of Judea — 
+            you have arrived. The Western Wall stands before you, ancient and eternal.
+          </p>
+          <p style="font-style:italic;color:var(--gold);font-size:1rem;margin:0.6rem 0;">
+            "If I forget thee, O Jerusalem, let my right hand forget her cunning." — Psalm 137:5
+          </p>
+          
+          <div id="victory-stats" class="victory-stats" style="background:rgba(0,0,0,0.3);border:1px solid var(--gold);border-radius:10px;padding:1rem;margin:1rem 0;text-align:left;">
+            <h3 style="color:var(--gold);text-align:center;margin-bottom:0.5rem;">Journey Summary</h3>
+            <div class="stat-row"><span>🗓️ Journey Duration:</span> <span id="v-days">0</span> days</div>
+            <div class="stat-row"><span>📏 Distance Traveled:</span> <span id="v-distance">0</span> km</div>
+            <div class="stat-row"><span>👥 Party Survivors:</span> <span id="v-survivors">0</span></div>
+            <div class="stat-row"><span>📜 Historical Knowledge:</span> <span id="v-knowledge">0</span></div>
+            <div class="stat-row"><span>🎒 Remaining Supplies:</span> <span id="v-supplies">0</span></div>
+            <div class="stat-row" style="font-size:1.1rem;margin-top:0.5rem;padding-top:0.5rem;border-top:1px solid rgba(218,165,32,0.3);">
+              <span>⭐ Final Score:</span> <span id="v-score" class="score-highlight" style="color:var(--gold);font-weight:bold;font-size:1.3rem;">0</span>
+            </div>
+            <div class="stat-row"><span>🏅 Rank:</span> <span id="v-rank" class="rank-highlight" style="color:var(--gold);font-weight:bold;">Pioneer</span></div>
+          </div>
+
+          <!-- Party Members Final Status -->
+          <div id="v-party" style="background:rgba(0,0,0,0.3);border:1px solid var(--gold);border-radius:10px;padding:1rem;margin:1rem 0;text-align:left;">
+            <h3 style="color:var(--gold);text-align:center;margin-bottom:0.5rem;">Your Party</h3>
+            <div id="v-party-members"></div>
+          </div>
+
+          <div id="v-achievements" class="achievements-display" style="margin:0.8rem 0;"></div>
+
+          <div style="margin:1.2rem 0;">
+            <img src="images/kochav-yair.png" alt="Your new home" style="max-width:100%;max-height:180px;border-radius:12px;border:2px solid var(--gold);box-shadow:0 0 15px rgba(218,165,32,0.3);" />
+            <p style="color:var(--gold);font-size:1.1rem;margin-top:0.5rem;font-weight:bold;">
+              Your future awaits in Eretz Yisrael
+            </p>
+            <p style="color:var(--text-secondary);font-size:0.9rem;">
+              The land is hard, but it is yours. Build, plant, dream — a new chapter begins.
+            </p>
+          </div>
+
+          <button onclick="location.reload()" class="retro-btn primary" style="font-size:1.1rem;padding:0.8rem 2rem;margin-top:0.5rem;">Play Again</button>
+        </div>
+      </div>
+
+      <!-- Message Log -->
+      <div id="message-log">
+        <div id="log-content"></div>
+        <button id="toggle-log">Log</button>
+      </div>
+
+    </div>
+
+    <!-- Retro UI Elements (hidden by default, toggled via Ctrl+R) -->
+    <div id="retro-landscape-strip" class="retro-ui-hidden">
+      <div class="landscape-sky"></div>
+      <div class="landscape-terrain"></div>
+      <div class="landscape-weather"></div>
+      <div class="wagon-container">
+        <div class="wagon-sprite">\ud83d\ude8c</div>
+      </div>
+    </div>
+    <div id="retro-status-bar" class="retro-ui-hidden">
+      <span>Date: <span id="retro-date">March 15, 1909</span></span>
+      <span>Weather: <img id="retro-weather-icon" src="images/weather-icons-sun.png" alt="" style="width:16px;height:16px;vertical-align:middle;"/> <span id="retro-weather">Fair</span></span>
+      <span>Health: <span id="retro-health" class="status-value">Good</span></span>
+      <span>Food: <span id="retro-food" class="status-value">500 lbs</span></span>
+      <span>Money: <span id="retro-money">$400</span></span>
+      <span>Dist: <span id="retro-distance">0</span> km</span>
+      <span>Next: <span id="next-landmark">Vienna</span> (<span id="miles-to-landmark">245</span> km)</span>
+    </div>
+    <div id="retro-dialog" class="retro-ui-hidden">
+      <p id="retro-dialog-text"></p>
+    </div>
+    <div id="retro-crt-overlay" class="retro-ui-hidden"></div>
+
+    <!-- Audio elements for sound effects -->
+    <audio id="audio-travel" loop>
+      <!-- Audio would go here if we had sound files -->
+    </audio>
+    <audio id="audio-event">
+      <!-- Event sound would go here -->
+    </audio>
+
+    <!-- DO NOT RE-ORDER JS FILES BELOW -->
+    <script src="js/Constants.js"></script>
+    <script src="js/GameState.js"></script>
+    <script src="js/DailyDecision.js"></script>
+    <script src="js/UI.js"></script>
+    <script src="js/VisualOverlayManager.js"></script>
+    <script src="js/Game.js"></script>
+    <script src="js/PartySelection.js"></script>
+    <script src="js/Event.js"></script>
+    <script src="js/Navigation.js"></script>
+    <script src="js/Init.js"></script>
+    <!-- DO NOT RE-ORDER JS FILES ABOVE -->
+
+
+  </body>
+</html>

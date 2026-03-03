@@ -1,0 +1,15 @@
+node_modules/
+*.code-search
+.DS_Store
+Thumbs.db
+
+# Dev/debug files
+debug.html
+functionality-test.html
+responsive-test.html
+retro-ui-demo.html
+test-overlay-system.html
+CHARACTER_PORTRAITS_SPECIFICATION.md
+DEVELOPMENT_HISTORY.md
+VISUAL_OVERLAY_SYSTEM_COMPLETE.md
+server.js

@@ -1,0 +1,757 @@
+{
+  "locations": {
+    "warsaw": {
+      "name": "Warsaw, Poland",
+      "description": "Starting point in the Pale of Settlement. The pogroms are worsening — it is time to leave.",
+      "isStarting": true,
+      "nextLocations": ["krakow"],
+      "terrain": "city",
+      "difficulty": 1,
+      "distanceToNext": 300,
+      "shops": ["general_store"],
+      "events": ["departure"],
+      "freshWater": true,
+      "historicalFact": "Warsaw's Jewish Quarter housed over 300,000 Jews in the 1890s, the largest urban Jewish community in Europe."
+    },
+    "krakow": {
+      "name": "Kraków, Poland",
+      "description": "Ancient Polish city with a vibrant Jewish quarter — Kazimierz.",
+      "nextLocations": ["vienna"],
+      "terrain": "city",
+      "difficulty": 1,
+      "distanceToNext": 250,
+      "shops": ["krakow_market"],
+      "events": ["krakow_arrival"],
+      "freshWater": true,
+      "historicalFact": "Kazimierz, Kraków's Jewish quarter, was home to some of Europe's most beautiful synagogues, dating back to the 15th century."
+    },
+    "vienna": {
+      "name": "Vienna, Austria",
+      "description": "Capital of the Austro-Hungarian Empire and hub of the Zionist movement.",
+      "nextLocations": ["trieste"],
+      "terrain": "city",
+      "difficulty": 1,
+      "distanceToNext": 300,
+      "shops": ["vienna_supplies"],
+      "events": ["train_journey", "herzl_encounter"],
+      "freshWater": true,
+      "historicalFact": "Theodor Herzl published 'Der Judenstaat' in Vienna in 1896, igniting the modern Zionist movement."
+    },
+    "trieste": {
+      "name": "Trieste Port, Italy",
+      "description": "Adriatic port city — gateway to the Mediterranean and the sea voyage ahead.",
+      "nextLocations": ["mediterranean"],
+      "terrain": "port",
+      "difficulty": 2,
+      "distanceToNext": 100,
+      "shops": ["port_supplies"],
+      "events": ["sea_voyage_begins"],
+      "freshWater": true,
+      "historicalFact": "Trieste was the primary embarkation point for Jewish emigrants heading to Palestine in the late 19th century."
+    },
+    "mediterranean": {
+      "name": "Mediterranean Sea",
+      "description": "The great crossing — weeks at sea on a crowded steamship toward the Holy Land.",
+      "nextLocations": ["jaffa"],
+      "terrain": "sea",
+      "difficulty": 3,
+      "distanceToNext": 400,
+      "events": ["storm_at_sea", "seasickness", "first_glimpse"],
+      "freshWater": false,
+      "historicalFact": "The sea voyage from Trieste to Jaffa typically took 10-14 days on a steamship in the 1890s."
+    },
+    "jaffa": {
+      "name": "Jaffa Port, Palestine",
+      "description": "Ancient port city — your first steps in the Holy Land, under Ottoman rule.",
+      "nextLocations": ["tel_aviv"],
+      "terrain": "port",
+      "difficulty": 3,
+      "distanceToNext": 90,
+      "shops": ["jaffa_market"],
+      "events": ["customs", "jaffa_arrival"],
+      "freshWater": true,
+      "historicalFact": "Jaffa was the main point of entry to Palestine. Immigrants were often turned away by Ottoman authorities."
+    },
+    "tel_aviv": {
+      "name": "Tel Aviv Settlement",
+      "description": "A new Jewish neighborhood north of Jaffa — sand dunes being transformed into a city.",
+      "nextLocations": ["rishon_lezion"],
+      "terrain": "settlement",
+      "difficulty": 2,
+      "distanceToNext": 120,
+      "shops": ["tel_aviv_supplies"],
+      "events": ["tel_aviv_founding"],
+      "freshWater": false,
+      "historicalFact": "Tel Aviv was founded in 1909 as a Jewish neighborhood outside Jaffa, starting with just 66 families drawing lots for plots of sand."
+    },
+    "rishon_lezion": {
+      "name": "Rishon LeZion",
+      "description": "'First to Zion' — one of the earliest Jewish agricultural settlements, famous for its vineyards.",
+      "nextLocations": ["rehovot"],
+      "terrain": "settlement",
+      "difficulty": 2,
+      "distanceToNext": 100,
+      "shops": ["rishon_market"],
+      "events": ["wine_harvest"],
+      "freshWater": true,
+      "historicalFact": "Rishon LeZion was founded in 1882 by First Aliyah immigrants. Baron Rothschild funded its famous winery."
+    },
+    "rehovot": {
+      "name": "Rehovot",
+      "description": "Agricultural settlement fighting malaria and cultivating citrus groves in the coastal plain.",
+      "nextLocations": ["hebron"],
+      "terrain": "farmland",
+      "difficulty": 3,
+      "distanceToNext": 140,
+      "shops": ["rehovot_supplies"],
+      "events": ["malaria_outbreak"],
+      "freshWater": true,
+      "historicalFact": "Rehovot was founded in 1890 and was notable for refusing Baron Rothschild's patronage, insisting on self-reliance."
+    },
+    "hebron": {
+      "name": "Hebron",
+      "description": "One of the oldest cities in the world — sacred to Jews, Christians, and Muslims alike.",
+      "nextLocations": ["bethlehem"],
+      "terrain": "mountain",
+      "difficulty": 4,
+      "distanceToNext": 100,
+      "shops": ["hebron_bazaar"],
+      "events": ["cave_of_patriarchs"],
+      "freshWater": true,
+      "historicalFact": "Hebron's Jewish community is one of the oldest in the world, centered around the Cave of the Patriarchs — burial place of Abraham."
+    },
+    "bethlehem": {
+      "name": "Bethlehem",
+      "description": "Ancient hillside town with olive groves and stone terraces, just south of Jerusalem.",
+      "nextLocations": ["jerusalem"],
+      "terrain": "mountain",
+      "difficulty": 3,
+      "distanceToNext": 75,
+      "events": ["bethlehem_rest"],
+      "freshWater": true,
+      "historicalFact": "Bethlehem's Jewish community dates back millennia. Rachel's Tomb on the road to Bethlehem is one of Judaism's holiest sites."
+    },
+    "jerusalem": {
+      "name": "Jerusalem",
+      "description": "The Holy City — your destination. Three thousand years of history await.",
+      "isDestination": true,
+      "terrain": "city",
+      "difficulty": 1,
+      "shops": ["jerusalem_bazaar"],
+      "events": ["western_wall"],
+      "freshWater": true,
+      "historicalFact": "By the 1890s, Jews were already the majority population in Jerusalem, though the Old City remained under Ottoman control."
+    }
+  },
+  "professions": {
+    "INTELLECTUAL": {
+      "name": "Intellectual/Writer",
+      "startingMoney": 400,
+      "startingSupplies": {
+        "food": 300,
+        "tools": 1,
+        "medicine": 3,
+        "water": 200,
+        "clothing": 2
+      },
+      "skills": {
+        "education": 5,
+        "trading": 2,
+        "farming": 1,
+        "leadership": 4,
+        "medicine": 3
+      },
+      "scoreMultiplier": 1.1
+    },
+    "CRAFTSMAN": {
+      "name": "Craftsman",
+      "startingMoney": 250,
+      "startingSupplies": {
+        "food": 400,
+        "tools": 4,
+        "medicine": 2,
+        "water": 250,
+        "clothing": 3
+      },
+      "skills": {
+        "education": 2,
+        "trading": 3,
+        "farming": 4,
+        "leadership": 2,
+        "medicine": 2
+      },
+      "scoreMultiplier": 1.2
+    },
+    "MERCHANT": {
+      "name": "Merchant",
+      "startingMoney": 600,
+      "startingSupplies": {
+        "food": 350,
+        "tools": 2,
+        "medicine": 2,
+        "water": 250,
+        "clothing": 3
+      },
+      "skills": {
+        "education": 3,
+        "trading": 5,
+        "farming": 1,
+        "leadership": 3,
+        "medicine": 1
+      },
+      "scoreMultiplier": 1.0
+    },
+    "RELIGIOUS_SCHOLAR": {
+      "name": "Community Leader",
+      "startingMoney": 300,
+      "startingSupplies": {
+        "food": 350,
+        "tools": 2,
+        "medicine": 3,
+        "water": 200,
+        "clothing": 3
+      },
+      "skills": {
+        "education": 4,
+        "trading": 2,
+        "farming": 2,
+        "leadership": 5,
+        "medicine": 2
+      },
+      "scoreMultiplier": 1.3
+    },
+    "FORMER_FARMER": {
+      "name": "Former Farmer",
+      "startingMoney": 200,
+      "startingSupplies": {
+        "food": 500,
+        "tools": 3,
+        "medicine": 1,
+        "water": 300,
+        "clothing": 2
+      },
+      "skills": {
+        "education": 1,
+        "trading": 2,
+        "farming": 5,
+        "leadership": 2,
+        "medicine": 1
+      },
+      "scoreMultiplier": 1.4
+    },
+    "NURSE": {
+      "name": "Medical Pioneer",
+      "startingMoney": 350,
+      "startingSupplies": {
+        "food": 300,
+        "tools": 1,
+        "medicine": 5,
+        "water": 250,
+        "clothing": 2
+      },
+      "skills": {
+        "education": 3,
+        "trading": 2,
+        "farming": 2,
+        "leadership": 3,
+        "medicine": 5
+      },
+      "scoreMultiplier": 1.3
+    },
+    "TEACHER": {
+      "name": "Educator & Scholar",
+      "startingMoney": 300,
+      "startingSupplies": {
+        "food": 350,
+        "tools": 2,
+        "medicine": 3,
+        "water": 200,
+        "clothing": 2
+      },
+      "skills": {
+        "education": 5,
+        "trading": 2,
+        "farming": 1,
+        "leadership": 4,
+        "medicine": 2
+      },
+      "scoreMultiplier": 1.2
+    },
+    "CHILD": {
+      "name": "Young Pioneer",
+      "startingMoney": 150,
+      "startingSupplies": {
+        "food": 400,
+        "tools": 1,
+        "medicine": 2,
+        "water": 300,
+        "clothing": 2
+      },
+      "skills": {
+        "education": 2,
+        "trading": 1,
+        "farming": 2,
+        "leadership": 3,
+        "medicine": 1
+      },
+      "scoreMultiplier": 1.5
+    }
+  },
+  "partyMembers": {
+    "characterSpecificPools": {
+      "CHILD": [
+        {
+          "firstName": "Hannah",
+          "lastName": "Rubinstein",
+          "relation": "Grandmother",
+          "profession": "Family Elder",
+          "personality": "wise",
+          "backstory": "Mia's loving grandmother who keeps family traditions alive",
+          "goal": "Protect her granddaughter and preserve family heritage",
+          "specialAbility": {
+            "name": "Family Wisdom",
+            "description": "Can predict weather and dangers, preventing disasters",
+            "power": 5,
+            "drawback": "Frail health, more susceptible to illness"
+          },
+          "skills": {
+            "farming": 2,
+            "leadership": 4,
+            "medicine": 3,
+            "trading": 1,
+            "education": 4
+          },
+          "portrait": "images/grandmother.png",
+          "familyMember": true
+        },
+        {
+          "firstName": "Tzvika",
+          "lastName": "Rubinstein", 
+          "relation": "Grandfather",
+          "profession": "Retired Craftsman",
+          "personality": "protective",
+          "backstory": "Mia's grandfather, skilled in old country ways",
+          "goal": "Use his knowledge to help the family survive",
+          "specialAbility": {
+            "name": "Old Country Knowledge",
+            "description": "Knows traditional remedies and survival techniques",
+            "power": 4,
+            "drawback": "Moves slowly, slows down travel pace"
+          },
+          "skills": {
+            "farming": 4,
+            "leadership": 3,
+            "medicine": 4,
+            "trading": 2,
+            "education": 2
+          },
+          "portrait": "images/grandfather.png",
+          "familyMember": true
+        },
+        {
+          "firstName": "Jeremy",
+          "lastName": "Hoover",
+          "relation": "Father", 
+          "profession": "Family Protector",
+          "personality": "devoted",
+          "backstory": "Mia's father, will do anything to keep his family safe",
+          "goal": "Ensure his daughter reaches the Holy Land safely",
+          "specialAbility": {
+            "name": "Protective Instinct", 
+            "description": "Takes damage for family members, preventing their injury",
+            "power": 5,
+            "drawback": "Suffers extra health loss when protecting others"
+          },
+          "skills": {
+            "farming": 3,
+            "leadership": 5,
+            "medicine": 2,
+            "trading": 3,
+            "education": 2
+          },
+          "portrait": "images/father.png",
+          "familyMember": true
+        },
+        {
+          "firstName": "Tali",
+          "lastName": "Hoover",
+          "relation": "Mother",
+          "profession": "Family Caretaker", 
+          "personality": "nurturing",
+          "backstory": "Mia's mother, keeps the family together through love",
+          "goal": "Maintain family unity during the hardships ahead",
+          "specialAbility": {
+            "name": "Family Unity",
+            "description": "Prevents family members from leaving the group", 
+            "power": 4,
+            "drawback": "Takes emotional damage when family is hurt"
+          },
+          "skills": {
+            "farming": 2,
+            "leadership": 4,
+            "medicine": 3,
+            "trading": 2,
+            "education": 3
+          },
+          "portrait": "images/mother.png",
+          "familyMember": true
+        },
+        {
+          "firstName": "Iris",
+          "lastName": "Goldstein",
+          "relation": "Neighbor",
+          "profession": "Community Helper",
+          "personality": "sociable", 
+          "backstory": "Friendly neighbor who knows everyone in the community",
+          "goal": "Use her connections to help during the journey",
+          "specialAbility": {
+            "name": "Community Connections",
+            "description": "Finds help and assistance in settlements",
+            "power": 3,
+            "drawback": "May leave if conditions become too harsh"
+          },
+          "skills": {
+            "farming": 2,
+            "leadership": 3,
+            "medicine": 2,
+            "trading": 4,
+            "education": 3
+          },
+          "portrait": "images/iris.png",
+          "familyMember": false
+        },
+        {
+          "firstName": "Chaim",
+          "lastName": "Goldstein", 
+          "relation": "Neighbor",
+          "profession": "Resourceful Scrounger",
+          "personality": "clever",
+          "backstory": "Neighbor known for finding things when needed most",
+          "goal": "Use his skills to gather resources for survival",
+          "specialAbility": {
+            "name": "Resourceful Scrounger",
+            "description": "Finds extra supplies and food during events",
+            "power": 4,
+            "drawback": "Sometimes gets into trouble with his schemes"
+          },
+          "skills": {
+            "farming": 3,
+            "leadership": 2,
+            "medicine": 1,
+            "trading": 5,
+            "education": 1
+          },
+          "portrait": "images/chaim.png",
+          "familyMember": false
+        }
+      ]
+    },
+    "templates": [
+      {
+        "firstName": "Avraham",
+        "lastName": "Cohen",
+        "profession": "Carpenter",
+        "personality": "practical",
+        "backstory": "Skilled woodworker seeking new opportunities",
+        "goal": "Build homes in the new settlement",
+        "skills": {
+          "farming": 3,
+          "leadership": 2,
+          "medicine": 1,
+          "trading": 2,
+          "education": 2
+        }
+      },
+      {
+        "firstName": "Sarah",
+        "lastName": "Goldstein",
+        "profession": "Teacher",
+        "personality": "intellectual",
+        "backstory": "Dedicated to Hebrew education revival",
+        "goal": "Establish schools in Palestine",
+        "skills": {
+          "farming": 1,
+          "leadership": 4,
+          "medicine": 2,
+          "trading": 2,
+          "education": 5
+        }
+      },
+      {
+        "firstName": "Moshe",
+        "lastName": "Rosenberg",
+        "profession": "Farmer",
+        "personality": "hardworking",
+        "backstory": "Agricultural expert from rural Poland",
+        "goal": "Develop modern farming techniques",
+        "skills": {
+          "farming": 5,
+          "leadership": 2,
+          "medicine": 1,
+          "trading": 3,
+          "education": 1
+        }
+      },
+      {
+        "firstName": "Rebecca",
+        "lastName": "Weiss",
+        "profession": "Nurse",
+        "personality": "caring",
+        "backstory": "Trained in basic medical care",
+        "goal": "Provide healthcare to settlers",
+        "skills": {
+          "farming": 2,
+          "leadership": 3,
+          "medicine": 5,
+          "trading": 1,
+          "education": 3
+        }
+      },
+      {
+        "firstName": "David",
+        "lastName": "Katz",
+        "profession": "Merchant",
+        "personality": "shrewd",
+        "backstory": "Experienced in international trade",
+        "goal": "Establish trade networks",
+        "skills": {
+          "farming": 1,
+          "leadership": 3,
+          "medicine": 1,
+          "trading": 5,
+          "education": 2
+        }
+      },
+      {
+        "firstName": "Yael",
+        "lastName": "Shapiro",
+        "profession": "Scholar",
+        "personality": "determined",
+        "backstory": "A young Zionist activist who organized secret meetings in her basement",
+        "goal": "Help build the first Hebrew-speaking community",
+        "skills": {
+          "farming": 1,
+          "leadership": 4,
+          "medicine": 2,
+          "trading": 2,
+          "education": 5
+        }
+      }
+    ]
+  },
+  "events": {
+    "departure": {
+      "title": "Farewell to Warsaw",
+      "text": "You say goodbye to family and friends. The streets of the Jewish Quarter grow small behind you. There is no turning back.",
+      "type": "narrative",
+      "effects": { "morale": -5, "historicalKnowledge": 1 }
+    },
+    "krakow_arrival": {
+      "title": "The Synagogues of Kazimierz",
+      "text": "In Kraków's Jewish quarter, you find a thriving community. Local Jews offer advice and supplies for the journey ahead.",
+      "type": "narrative",
+      "effects": { "morale": 5, "historicalKnowledge": 1 }
+    },
+    "train_journey": {
+      "title": "Train Through the Empire",
+      "text": "The rattling train carries you through the Austro-Hungarian countryside. Fellow passengers share stories of those who've already made Aliyah.",
+      "type": "narrative",
+      "effects": { "day": 3, "money": -10 }
+    },
+    "herzl_encounter": {
+      "title": "The Spirit of Herzl",
+      "text": "In a Viennese café, you read a pamphlet by Theodor Herzl: 'If you will it, it is no dream.' The words fill you with renewed purpose.",
+      "type": "narrative",
+      "effects": { "morale": 15, "historicalKnowledge": 2 }
+    },
+    "sea_voyage_begins": {
+      "title": "Setting Sail",
+      "text": "You board a crowded steamship. The Adriatic gleams ahead. Passengers pray, cry, and sing as Europe fades from view.",
+      "type": "narrative",
+      "effects": { "morale": 10, "historicalKnowledge": 1 }
+    },
+    "storm_at_sea": {
+      "title": "Storm at Sea!",
+      "text": "A fierce Mediterranean storm rocks the ship. Waves crash over the deck. Passengers are terrified — some fall ill.",
+      "type": "challenge",
+      "choices": [
+        { "text": "Stay below deck (safer but crowded)", "effects": { "health": -5, "morale": -5 } },
+        { "text": "Help the crew on deck (risky but heroic)", "effects": { "health": -15, "morale": 10 } },
+        { "text": "Use medicine to help the sick", "effects": { "medicine": -1, "health": 5, "morale": 5 } }
+      ]
+    },
+    "seasickness": {
+      "title": "Seasickness Spreads",
+      "text": "The cramped conditions below deck breed illness. Several in your party look pale and weak.",
+      "type": "challenge",
+      "effects": { "health": -10, "morale": -5 }
+    },
+    "first_glimpse": {
+      "title": "First Glimpse of Eretz Yisrael",
+      "text": "Land! The coast of Palestine appears on the horizon. Passengers weep, embrace, and recite Shehecheyanu. You have arrived.",
+      "type": "narrative",
+      "effects": { "morale": 25, "historicalKnowledge": 2 }
+    },
+    "customs": {
+      "title": "Ottoman Customs",
+      "text": "Ottoman officials inspect your documents. A money changer at the customs house converts your rubles to Ottoman lira — the only currency accepted in Palestine.",
+      "type": "challenge",
+      "choices": [
+        { "text": "Pay the bribe (2 lira)", "effects": { "money": -2 } },
+        { "text": "Wait patiently (lose 2 days)", "effects": { "day": 2, "morale": -5 } },
+        { "text": "Try to sneak past (risky)", "effects": { "health": -10, "money": -1 } }
+      ]
+    },
+    "jaffa_arrival": {
+      "title": "The Old Port of Jaffa",
+      "text": "Jaffa is ancient and bustling — Arabic, Hebrew, and a dozen other languages fill the air. The smell of oranges mixes with sea salt.",
+      "type": "narrative",
+      "effects": { "morale": 10, "historicalKnowledge": 1 }
+    },
+    "tel_aviv_founding": {
+      "title": "A City from Sand",
+      "text": "You walk among the sand dunes north of Jaffa where Jewish families are building a new neighborhood. They call it Tel Aviv — 'Hill of Spring.'",
+      "type": "narrative",
+      "effects": { "morale": 15, "historicalKnowledge": 2 }
+    },
+    "wine_harvest": {
+      "title": "The Vineyards of Rishon LeZion",
+      "text": "The settlers of Rishon LeZion invite you to help with the grape harvest. The wine cellars funded by Baron Rothschild are impressive.",
+      "type": "narrative",
+      "effects": { "food": 30, "morale": 10, "historicalKnowledge": 1 }
+    },
+    "malaria_outbreak": {
+      "title": "Malaria in the Swamps",
+      "text": "The coastal plain is plagued by mosquitoes and malaria. Several in your party develop fever and chills.",
+      "type": "challenge",
+      "choices": [
+        { "text": "Use medicine to treat the sick", "effects": { "medicine": -2, "health": 10 } },
+        { "text": "Rest until they recover", "effects": { "day": 3, "health": 5 } },
+        { "text": "Push through (risky)", "effects": { "health": -20, "morale": -10 } }
+      ]
+    },
+    "cave_of_patriarchs": {
+      "title": "The Cave of the Patriarchs",
+      "text": "You visit the ancient Cave of Machpelah where Abraham, Isaac, and Jacob are buried. The weight of three thousand years presses upon you.",
+      "type": "narrative",
+      "effects": { "morale": 20, "historicalKnowledge": 3 }
+    },
+    "bethlehem_rest": {
+      "title": "Rest Near Rachel's Tomb",
+      "text": "You pause at Rachel's Tomb on the road to Jerusalem. Pilgrims from many faiths pass by. Jerusalem is only a day's walk away.",
+      "type": "narrative",
+      "effects": { "morale": 15, "health": 5, "historicalKnowledge": 1 }
+    },
+    "western_wall": {
+      "title": "The Western Wall",
+      "text": "You stand before the last remnant of the Holy Temple. Tears stream down your face as you press a prayer into the ancient stones.",
+      "type": "narrative",
+      "effects": { "morale": 30, "historicalKnowledge": 3 }
+    },
+    "settlement_founding": {
+      "title": "A New Beginning",
+      "text": "You have arrived. The land stretches before you — rocky, dry, but full of promise. This is where you will build a new life.",
+      "type": "narrative",
+      "effects": { "morale": 25, "historicalKnowledge": 2 }
+    }
+  },
+  "shops": {
+    "general_store": {
+      "name": "Goldstein's General Store",
+      "location": "Warsaw",
+      "items": [
+        {"name": "food", "price": 10, "quantity": 20},
+        {"name": "water", "price": 4, "quantity": 15},
+        {"name": "tools", "price": 50, "quantity": 1},
+        {"name": "medicine", "price": 25, "quantity": 1},
+        {"name": "clothing", "price": 15, "quantity": 1}
+      ]
+    },
+    "krakow_market": {
+      "name": "Kazimierz Market",
+      "location": "Kraków",
+      "items": [
+        {"name": "food", "price": 8, "quantity": 20},
+        {"name": "water", "price": 3, "quantity": 15},
+        {"name": "medicine", "price": 20, "quantity": 1},
+        {"name": "clothing", "price": 12, "quantity": 1}
+      ]
+    },
+    "vienna_supplies": {
+      "name": "Viennese Trading House",
+      "location": "Vienna",
+      "items": [
+        {"name": "food", "price": 12, "quantity": 15},
+        {"name": "water", "price": 5, "quantity": 15},
+        {"name": "tools", "price": 55, "quantity": 1},
+        {"name": "medicine", "price": 30, "quantity": 1},
+        {"name": "clothing", "price": 18, "quantity": 1}
+      ]
+    },
+    "port_supplies": {
+      "name": "Mediterranean Trading Post",
+      "location": "Trieste",
+      "items": [
+        {"name": "food", "price": 15, "quantity": 10},
+        {"name": "water", "price": 5, "quantity": 20},
+        {"name": "medicine", "price": 30, "quantity": 1}
+      ]
+    },
+    "jaffa_market": {
+      "name": "Jaffa Orange Bazaar",
+      "location": "Jaffa",
+      "items": [
+        {"name": "food", "price": 1, "quantity": 15},
+        {"name": "water", "price": 1, "quantity": 15},
+        {"name": "tools", "price": 5, "quantity": 1},
+        {"name": "medicine", "price": 4, "quantity": 1}
+      ]
+    },
+    "tel_aviv_supplies": {
+      "name": "Ahuzat Bayit Store",
+      "location": "Tel Aviv",
+      "items": [
+        {"name": "food", "price": 1, "quantity": 12},
+        {"name": "tools", "price": 5, "quantity": 1},
+        {"name": "water", "price": 1, "quantity": 10}
+      ]
+    },
+    "rishon_market": {
+      "name": "Rothschild Winery Store",
+      "location": "Rishon LeZion",
+      "items": [
+        {"name": "food", "price": 1, "quantity": 20},
+        {"name": "medicine", "price": 3, "quantity": 1},
+        {"name": "water", "price": 1, "quantity": 15}
+      ]
+    },
+    "rehovot_supplies": {
+      "name": "Pioneer Supply Depot",
+      "location": "Rehovot",
+      "items": [
+        {"name": "food", "price": 1, "quantity": 15},
+        {"name": "medicine", "price": 4, "quantity": 1},
+        {"name": "tools", "price": 6, "quantity": 1}
+      ]
+    },
+    "hebron_bazaar": {
+      "name": "Hebron Market",
+      "location": "Hebron",
+      "items": [
+        {"name": "food", "price": 1, "quantity": 15},
+        {"name": "water", "price": 1, "quantity": 10},
+        {"name": "clothing", "price": 2, "quantity": 1}
+      ]
+    },
+    "jerusalem_bazaar": {
+      "name": "Old City Bazaar",
+      "location": "Jerusalem",
+      "items": [
+        {"name": "food", "price": 2, "quantity": 15},
+        {"name": "tools", "price": 6, "quantity": 1},
+        {"name": "medicine", "price": 4, "quantity": 1},
+        {"name": "water", "price": 1, "quantity": 10}
+      ]
+    }
+  }
+}

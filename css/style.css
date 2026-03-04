@@ -5103,7 +5103,7 @@ html, body {
 
 /* Location-specific fullscreen backgrounds */
 .location-bg-fullscreen.location-warsaw { background-image: url('../images/warsaw.png'); }
-.location-bg-fullscreen.location-krakow { background-image: url('../images/russia-poland.png'); }
+.location-bg-fullscreen.location-krakow { background-image: url('../images/krakow.png'); }
 .location-bg-fullscreen.location-vienna { background-image: url('../images/vienna.png'); }
 .location-bg-fullscreen.location-trieste { background-image: url('../images/trieste-port.png'); }
 .location-bg-fullscreen.location-mediterranean { background-image: url('../images/mediterranean-sea-calm.png'); }
@@ -5160,6 +5160,7 @@ html, body {
 .location-bg-fullscreen.event-train-talk { background-image: url('../images/train-talk.png'); }
 .location-bg-fullscreen.event-train-rest { background-image: url('../images/train-rest.png'); }
 .location-bg-fullscreen.event-synagogue { background-image: url('../images/synagogue.png'); }
+.location-bg-fullscreen.event-synagogue-close { background-image: url('../images/synagoue-close.png'); }
 
 /* Ship / sea event backgrounds */
 .location-bg-fullscreen.event-ship-talk { background-image: url('../images/ship-talk-passengers.png'); }
@@ -5180,8 +5181,13 @@ html, body {
 .location-bg-fullscreen.event-palestine-rain { background-image: url('../images/travel-palestine-rain.png'); }
 .location-bg-fullscreen.event-desert { background-image: url('../images/desert-landscape.png'); }
 .location-bg-fullscreen.event-caravan { background-image: url('../images/caravan-sunset.png'); }
+.location-bg-fullscreen.event-bedouin-traders { background-image: url('../images/bedouin-traders.png'); }
+.location-bg-fullscreen.event-boat-sick { background-image: url('../images/boat-sick.png'); }
+.location-bg-fullscreen.event-rachel-tomb { background-image: url('../images/rachel-tomb.png'); }
+.location-bg-fullscreen.event-tel-aviv-sand { background-image: url('../images/tel-aviv-sand.png'); }
 .location-bg-fullscreen.event-settlement { background-image: url('../images/settlement-building.png'); }
 .location-bg-fullscreen.event-robbers { background-image: url('../images/highway-robbers.png'); }
+.location-bg-fullscreen.event-ancient-ruins { background-image: url('../images/ancient-ruins.png'); }
 .location-bg-fullscreen.event-foraging-desert { background-image: url('../images/foraging-desert.png'); }
 .location-bg-fullscreen.event-kochav-yair { background-image: url('../images/kochav-yair.png'); }
 .location-bg-fullscreen.event-jaffa-interior { background-image: url('../images/jaffa-interior.png'); }

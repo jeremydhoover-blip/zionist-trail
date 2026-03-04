@@ -987,7 +987,15 @@ class DailyDecision {
         'bethlehem': 'location-bethlehem',
         'jerusalem': 'location-jerusalem'
       };
-      const cssClass = cssMappings[locationKey] || 'location-warsaw';
+      let cssClass = cssMappings[locationKey] || 'location-warsaw';
+      // After arrival events, show interior/city image instead of port
+      if (locationKey === 'jaffa' && this.gameState.flags['_firedArrivalEvents_jaffa']) {
+        cssClass = 'event-jaffa-interior';
+      }
+      // Tel Aviv: show sand dunes on first arrival
+      if (locationKey === 'tel_aviv' && this.gameState.flags['_firedArrivalEvents_tel_aviv']) {
+        cssClass = 'event-tel-aviv-sand';
+      }
       locationBg.classList.add(cssClass);
     }
   }
@@ -1397,7 +1405,7 @@ class DailyDecision {
         evt = trainEvents[Math.floor(Math.random() * trainEvents.length)];
       } else if (onSea) {
         const seaEvents = [
-          { text: `${memberName} gets terribly seasick. The rocking of the ship is relentless.`, type: 'negative', sicken: true, bg: 'event-ship-talk' },
+          { text: `${memberName} gets terribly seasick. The rocking of the ship is relentless.`, type: 'negative', sicken: true, bg: 'event-boat-sick' },
           { text: `A sailor teaches your party how to tie knots and mend sails. Useful skills!`, type: 'positive', morale: 5, knowledge: 1, bg: 'event-shipdeck' },
           { text: `A wave crashes over the deck, soaking supplies! Some food is ruined.`, type: 'negative', food: -(5 + Math.floor(Math.random() * 10)), bg: 'event-med-stormy' },
           { text: `You spot dolphins swimming alongside the ship! Children rush to the railing, laughing and pointing. Even the sailors stop to watch.`, type: 'positive', morale: 15, bg: 'event-sea-dolphins' },
@@ -1422,7 +1430,7 @@ class DailyDecision {
       } else if (inPalestine) {
         const palestineEvents = [
           { text: `${memberName} stumbles on a rocky path and sprains an ankle.`, type: 'negative', health: -10, bg: 'travel-palestine-hills' },
-          { text: `A Bedouin trader offers to sell you water at a fair price.`, type: 'neutral', water: 8, money: -3, bg: 'event-caravan' },
+          { text: `A Bedouin trader offers to sell you water at a fair price.`, type: 'neutral', water: 8, money: -3, bg: 'event-bedouin-traders' },
           { text: `You meet a group of Bilu pioneers who share food and encourage your party.`, type: 'positive', food: 10, morale: 12, knowledge: 1, bg: 'travel-palestine' },
           { text: `The heat is unbearable. ${memberName} suffers from sunstroke.`, type: 'negative', sicken: true, bg: 'event-desert' },
           { text: `You discover an ancient well with fresh water!`, type: 'positive', water: 15, bg: 'travel-palestine-hills' },
@@ -1440,7 +1448,7 @@ class DailyDecision {
           { text: `${memberName} trades a spare tool with a Bedouin shepherd for a goatskin of fresh milk. A rare treat!`, type: 'positive', food: 5, morale: 8, tools: -1, bg: 'event-caravan' },
           { text: `Rain falls in the Judean hills! The parched landscape transforms. Your party collects rainwater in every container.`, type: 'positive', water: 12, morale: 10, bg: 'event-palestine-rain' },
           { text: `A jackal howls in the night, spooking the group. ${memberName} keeps watch until dawn.`, type: 'warning', morale: -3, bg: 'travel-palestine-hills' },
-          { text: `You pass Rachel's Tomb on the road to Bethlehem. The ancient site fills your party with awe and determination.`, type: 'positive', morale: 15, knowledge: 2, bg: 'event-synagogue' },
+          { text: `You pass Rachel's Tomb on the road to Bethlehem. The ancient site fills your party with awe and determination.`, type: 'positive', morale: 15, knowledge: 2, bg: 'event-rachel-tomb' },
           { text: `An Arab village elder invites your group to rest in his courtyard. He serves strong coffee and shares news of the road ahead.`, type: 'positive', morale: 8, knowledge: 1, bg: 'travel-palestine' },
           { text: `${memberName} finds a wild fig tree laden with fruit! The group eats well today.`, type: 'positive', food: 12, morale: 5, bg: 'travel-palestine-hills' },
         ];

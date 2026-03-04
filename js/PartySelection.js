@@ -391,7 +391,7 @@ class PartySelection {
       confirmBtn.disabled = !canConfirm;
       
       if (canConfirm) {
-        confirmBtn.textContent = 'Continue with Selected Companions';
+        confirmBtn.textContent = 'Continue';
       } else {
         confirmBtn.textContent = `Select ${this.maxSelections - this.selectedCompanions.length} More Companions`;
       }
@@ -744,9 +744,10 @@ class PartySelection {
     
     // Update special ability
     document.getElementById('modal-ability-name').textContent = candidate.specialAbility.name;
-    document.getElementById('modal-ability-description').textContent = candidate.specialAbility.description;
+    document.getElementById('modal-ability-description').textContent = candidate.specialAbility.description.endsWith('.') ? candidate.specialAbility.description : candidate.specialAbility.description + '.';
     if (candidate.specialAbility.drawback) {
-      document.getElementById('modal-ability-description').innerHTML += `<br><em>${candidate.specialAbility.drawback}</em>`;
+      const drawbackText = candidate.specialAbility.drawback.endsWith('.') ? candidate.specialAbility.drawback : candidate.specialAbility.drawback + '.';
+      document.getElementById('modal-ability-description').innerHTML += `<br><em>${drawbackText}</em>`;
     }
 
     // Update portrait
@@ -939,7 +940,7 @@ class PartySelection {
     // Update the continue button to go to supply purchase
     const continueBtn = document.getElementById('continue-to-party-selection');
     if (continueBtn) {
-      continueBtn.textContent = 'Purchase Supplies for the Journey';
+      continueBtn.textContent = 'Purchase Supplies';
       
       // Remove old event listeners and add new one
       const newBtn = continueBtn.cloneNode(true);

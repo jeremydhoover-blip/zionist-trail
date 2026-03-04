@@ -24,8 +24,15 @@ class DailyDecision {
     });
   }
 
+  // Scroll the event section to the top
+  scrollEventToTop() {
+    const el = document.getElementById('game-event-area');
+    if (el) el.scrollTop = 0;
+  }
+
   // Main daily decision interface - like Oregon Trail's "What do you want to do?"
   showDailyChoices() {
+    this.scrollEventToTop();
     // Check if at destination — handles both fresh arrival and loaded saves
     if (this.gameState.gameWon || this.isAtDestination()) { this.handleVictory(); return; }
     if (!this.gameState.gameActive) return;
@@ -1052,6 +1059,7 @@ class DailyDecision {
     if (!this.isWaitingForChoice) return;
     
     this.isWaitingForChoice = false;
+    this.scrollEventToTop();
 
     // Track daily action usage for limited actions
     const limitedActions = ['talk','hunt','forage','train_cards','train_vendor','ship_dice','ship_galley','ship_explore','explore_ruins','trade_bedouin','rest','supplies'];
@@ -1206,8 +1214,10 @@ class DailyDecision {
           if (newLoc.historicalFact) {
             narrative.push({ text: newLoc.historicalFact, type: 'neutral' });
           }
-          // Trigger scripted location events
-          if (newLoc.events && newLoc.events.length > 0) {
+          // Trigger scripted location events (only once per location)
+          const firedKey = `_firedArrivalEvents_${nextLocationKey}`;
+          if (newLoc.events && newLoc.events.length > 0 && !this.gameState.flags[firedKey]) {
+            this.gameState.flags[firedKey] = true;
             const eventKey = newLoc.events[0];
             const game = window.ZionistH.gameInstance;
             if (game && game.event) {
@@ -1536,6 +1546,7 @@ class DailyDecision {
 
   // Show narrative events for the day as a dismissible panel
   showDayNarrative(narrative, onDismiss) {
+    this.scrollEventToTop();
     // Update the full visual section — background, title card text, HUD, party sprite
     this.updateVisualSection();
 
@@ -2450,6 +2461,7 @@ class DailyDecision {
   }
 
   showPartyStatusPanel() {
+    this.scrollEventToTop();
     const eventTitle = document.getElementById('event-title');
     const eventDescription = document.getElementById('event-description');
     const choicesContainer = document.querySelector('.choices-container');
@@ -2460,23 +2472,36 @@ class DailyDecision {
 
     if (eventTitle) eventTitle.textContent = 'Your Traveling Party';
     if (eventDescription) {
+      const self = this;
       let html = '<div style="text-align:left;">';
       this.gameState.partyMembers.forEach(m => {
         const imgSrc = ZionistH.getPortraitImage(m);
         const healthBar = m.isAlive ? `<span style="color:${m.health > 60 ? '#228b22' : m.health > 30 ? '#daa520' : '#dc143c'};">${Math.ceil(m.health)}%</span>` : '<span style="color:#666;">Deceased</span>';
         const opacity = m.isAlive ? '1' : '0.4';
-        html += `<div style="display:flex;align-items:center;gap:0.6rem;padding:0.35rem 0;border-bottom:1px solid rgba(218,165,32,0.2);opacity:${opacity};">`;
+        const cursor = m.isAlive ? 'cursor:pointer;' : '';
+        html += `<div class="party-check-member" data-member-id="${m.id}" style="display:flex;align-items:center;gap:0.6rem;padding:0.5rem;border-bottom:1px solid rgba(218,165,32,0.2);opacity:${opacity};${cursor}border-radius:6px;transition:background 0.2s;" ${m.isAlive ? 'onmouseover="this.style.background=\'rgba(255,215,0,0.1)\'" onmouseout="this.style.background=\'transparent\'"' : ''}>`;
         html += `<img src="${imgSrc}" alt="${m.firstName}" style="width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid ${m.isAlive ? (m.health > 60 ? '#228b22' : m.health > 30 ? '#daa520' : '#dc143c') : '#666'};" />`;
-        html += `<div><strong>${m.fullName}</strong> <small style="color:#a89880;">(${m.profession || 'Pioneer'})</small><br>`;
+        html += `<div style="flex:1;"><strong>${m.fullName}</strong> <small style="color:#a89880;">(${m.profession || 'Pioneer'})</small><br>`;
         html += `Health: ${healthBar}`;
         if (m.isAlive) {
           html += ` &nbsp; Morale: ${Math.ceil(m.morale || 0)}%`;
           if (m.isDiseased) html += ` &nbsp; <span style="color:#dc143c;">${m.diseaseType}</span>`;
         }
-        html += `</div></div>`;
+        html += `</div>`;
+        if (m.isAlive) html += `<div style="color:var(--text-accent);font-size:0.8rem;">Details ▸</div>`;
+        html += `</div>`;
       });
       html += '</div>';
       eventDescription.innerHTML = html;
+
+      // Attach click handlers
+      document.querySelectorAll('.party-check-member').forEach(el => {
+        const memberId = el.dataset.memberId;
+        const member = self.gameState.partyMembers.find(p => String(p.id) === String(memberId));
+        if (member && member.isAlive) {
+          el.addEventListener('click', () => self.showMemberDetailPanel(member, true));
+        }
+      });
     }
 
     if (choicesContainer) {
@@ -2494,6 +2519,7 @@ class DailyDecision {
   }
 
   _renderPaceScreen() {
+    this.scrollEventToTop();
     const eventTitle = document.getElementById('event-title');
     const eventDescription = document.getElementById('event-description');
     const choicesContainer = document.querySelector('.choices-container');
@@ -2582,7 +2608,8 @@ class DailyDecision {
     }
   }
 
-  showMemberDetailPanel(member) {
+  showMemberDetailPanel(member, fromPartyList = false) {
+    this.scrollEventToTop();
     const eventTitle = document.getElementById('event-title');
     const eventDescription = document.getElementById('event-description');
     const choicesContainer = document.querySelector('.choices-container');
@@ -2686,7 +2713,7 @@ class DailyDecision {
           }
           break;
       }
-      self.showMemberDetailPanel(m); // refresh
+      self.showMemberDetailPanel(m, fromPartyList); // refresh
     };
 
     if (choicesContainer) {
@@ -2694,12 +2721,13 @@ class DailyDecision {
       const btn = document.createElement('button');
       btn.className = 'event-choice available primary-action';
       btn.innerHTML = '<div class="action-content"><div class="action-details"><div class="action-text">Back</div></div></div>';
-      btn.addEventListener('click', () => this.showDailyChoices());
+      btn.addEventListener('click', () => fromPartyList ? this.showPartyStatusPanel() : this.showDailyChoices());
       choicesContainer.appendChild(btn);
     }
   }
 
   showInventoryPanel() {
+    this.scrollEventToTop();
     const eventTitle = document.getElementById('event-title');
     const eventDescription = document.getElementById('event-description');
     const choicesContainer = document.querySelector('.choices-container');

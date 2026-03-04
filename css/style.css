@@ -149,10 +149,14 @@ html, body {
   max-width: 95vw;
   max-height: 95vh;
   overflow-y: auto;
+  overflow-x: hidden;
   color: var(--text-primary);
   text-align: center;
   box-shadow: 0 20px 60px rgba(0,0,0,0.8);
   backdrop-filter: blur(10px);
+  box-sizing: border-box;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 /* Title Screen - Cover Image Background */
@@ -272,7 +276,7 @@ html, body {
   font-weight: bold;
   position: absolute;
   top: 1rem;
-  right: 1rem;
+  left: 1rem;
   z-index: 20;
   display: inline-flex;
   align-items: center;
@@ -288,9 +292,7 @@ html, body {
 }
 
 .back-btn::before {
-  content: "←";
-  font-size: 1.4rem;
-  font-weight: bold;
+  content: none;
 }
 
 /* Adaptive Positioning for Different Overlay Types */
@@ -333,11 +335,13 @@ html, body {
 /* Character Selection - Large Cards */
 .profession-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.5rem;
   margin: 2rem 0;
   max-width: 1400px;
-  padding: 0 1rem;
+  padding: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* Enhanced Party Selection Interface */
@@ -347,7 +351,8 @@ html, body {
   gap: 1.5rem;
   margin: 2rem auto;
   max-width: 1400px;
-  padding: 0 1rem;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .party-candidate {
@@ -464,8 +469,8 @@ html, body {
   padding: 0.8rem;
   font-size: 0.9rem;
   margin-top: 1rem;
-  height: 130px;
-  overflow: hidden;
+  min-height: 100px;
+  overflow: visible;
 }
 
 .ability-title {
@@ -688,20 +693,26 @@ html, body {
 
 /* Companion Summary Styling for Warsaw Scene */
 .companion-summary {
-  margin: 2rem 0;
-  padding: 1.5rem;
+  margin: 1.5rem 0;
+  padding: 1rem;
   background: rgba(255, 215, 0, 0.1);
   border: 2px solid var(--border-color);
   border-radius: 10px;
+  overflow: hidden;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .companion-item {
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid var(--border-color);
   border-radius: 8px;
-  padding: 1rem;
-  margin-bottom: 1rem;
+  padding: 0.75rem;
+  margin-bottom: 0.75rem;
   transition: all 0.3s ease;
+  overflow: hidden;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .companion-item:last-child {
@@ -732,10 +743,10 @@ html, body {
 }
 
 .companion-ability {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  margin-top: 0.5rem;
+  margin-top: 0.3rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--text-primary);
 }
 
 .ability-icon {
@@ -1107,37 +1118,98 @@ html, body {
 /* Responsive modal design */
 @media (max-width: 768px) {
   .modal-content {
-    width: 95%;
-    max-height: 95vh;
+    width: 98%;
+    max-height: 98vh;
+    border-radius: 12px;
   }
 
   .modal-header {
     flex-direction: column;
     text-align: center;
-    gap: 1rem;
+    gap: 0.5rem;
+    padding: 0.75rem;
   }
 
   .modal-portrait {
-    width: 100px;
-    height: 100px;
-    font-size: 2.5rem;
+    width: 56px;
+    height: 56px;
+    font-size: 1.8rem;
   }
 
   .modal-basic-info h2 {
-    font-size: 1.8rem;
+    font-size: 1.2rem;
+    margin-bottom: 0.15rem;
+  }
+
+  .modal-relation {
+    font-size: 0.9rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .modal-special-ability {
+    padding: 0.5rem;
+    font-size: 0.85rem;
+  }
+
+  .modal-special-ability strong {
+    font-size: 0.9rem;
+    margin-bottom: 0.15rem;
+  }
+
+  .modal-body {
+    padding: 0.75rem;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .modal-section {
+    margin-bottom: 0.75rem;
+  }
+
+  .modal-section h3 {
+    font-size: 1rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .modal-backstory {
+    font-size: 0.9rem;
+    padding: 0.6rem;
+  }
+
+  .modal-skill-item {
+    padding: 0.75rem;
   }
 
   .modal-skills-grid {
     grid-template-columns: 1fr;
-  }
-
-  .modal-footer {
-    flex-direction: column;
     gap: 0.5rem;
   }
 
+  .modal-goal {
+    padding: 0.75rem;
+    font-size: 0.95rem;
+  }
+
+  .modal-footer {
+    flex-direction: row;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+  }
+
   .modal-footer .retro-btn {
-    width: 100%;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.85rem;
+  }
+
+  .modal-footer .retro-btn:not(.primary) {
+    display: none;
+  }
+
+  .modal-close-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 1.2rem;
+    top: 0.5rem;
+    right: 0.5rem;
   }
 }
 
@@ -1296,6 +1368,10 @@ html, body {
   color: var(--text-primary);
 }
 
+.resources .ri {
+  margin-right: 0.25rem;
+}
+
 .special {
   font-style: italic;
   color: var(--text-accent);
@@ -1306,12 +1382,13 @@ html, body {
 .story-screen {
   max-width: 1200px;
   padding: 3rem;
-  text-align: left;
+  text-align: center;
 }
 
 .story-header {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
+  padding-top: 1.5rem;
 }
 
 .story-header h2 {
@@ -1500,7 +1577,7 @@ html, body {
 
 .shop-items {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr));
   gap: 2rem;
   margin: 2rem 0;
 }
@@ -1513,6 +1590,7 @@ html, body {
   align-items: center;
   gap: 2rem;
   border-radius: 10px;
+  box-sizing: border-box;
 }
 
 .item-icon {
@@ -2886,9 +2964,49 @@ html, body {
   html, body {
     font-size: 16px;
   }
+
+  .overlay-content {
+    padding: 1.5rem;
+    padding-top: 3.5rem;
+  }
+
+  .overlay-content h2 {
+    font-size: 1.5rem;
+  }
   
   .profession-cards {
     grid-template-columns: 1fr;
+    padding: 0;
+  }
+
+  .party-selection-grid {
+    padding: 0;
+  }
+
+  .story-screen {
+    padding: 1.5rem;
+  }
+
+  .story-header h2 {
+    font-size: 1.8rem;
+  }
+
+  .story-text {
+    font-size: 1.1rem;
+  }
+
+  .shop-items {
+    gap: 1rem;
+  }
+
+  .shop-item {
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .shop-item .ri-lg {
+    width: 44px;
+    height: 44px;
   }
   
   .party-members {
@@ -2941,8 +3059,97 @@ html, body {
 
 @media (max-width: 480px) {
   .overlay-content {
-    padding: 2rem;
-    margin: 1rem;
+    padding: 1rem;
+    padding-top: 3rem;
+    margin: 0.25rem;
+    max-width: 100vw;
+    border-radius: 10px;
+  }
+
+  .overlay-content h2 {
+    font-size: 1.3rem;
+    margin-top: 0;
+    padding-right: 0;
+  }
+
+  .overlay-content p {
+    font-size: 0.95rem;
+  }
+
+  .back-btn {
+    padding: 0.25rem 0.6rem;
+    font-size: 0.7rem;
+    top: 0.4rem;
+    left: 0.4rem;
+  }
+
+  .back-btn::before {
+    font-size: 1.1rem;
+  }
+
+  .profession-cards {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin: 1rem 0;
+    padding: 0;
+  }
+
+  .profession-card {
+    padding: 1rem;
+  }
+
+  .profession-card h3 {
+    font-size: 1.1rem;
+  }
+
+  .party-selection-grid {
+    gap: 1rem;
+    padding: 0;
+  }
+
+  .party-selection-info {
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .selection-status {
+    font-size: 1rem;
+  }
+
+  .selection-instructions {
+    font-size: 0.9rem;
+  }
+
+  .story-screen {
+    padding: 1rem;
+  }
+
+  .story-header h2 {
+    font-size: 1.4rem;
+  }
+
+  .story-text {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .shop-items {
+    gap: 0.75rem;
+  }
+
+  .shop-item {
+    padding: 0.75rem;
+    gap: 0.75rem;
+  }
+
+  .item-icon {
+    font-size: 2rem;
+    width: 36px;
+  }
+
+  .shop-item .ri-lg {
+    width: 36px;
+    height: 36px;
   }
   
   .party-members {
@@ -3625,6 +3832,7 @@ html, body {
   left: 0;
   width: 100vw;
   height: 100vh;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
   background: var(--primary-bg);
@@ -3632,6 +3840,7 @@ html, body {
   opacity: 0;
   visibility: hidden;
   transition: all 0.5s ease;
+  overflow: hidden;
 }
 
 .main-game-container.active {
@@ -4194,7 +4403,6 @@ html, body {
 .action-content {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 0.5rem;
   width: 100%;
 }
@@ -4212,7 +4420,7 @@ html, body {
   align-items: center;
   justify-content: center;
   border: 2px solid var(--gold);
-  margin-left: auto;
+  order: -1;
 }
 
 .event-choice.unavailable .action-remaining {
@@ -4398,12 +4606,14 @@ html, body {
   width: 18px;
   height: 18px;
   vertical-align: middle;
+  border-radius: 4px;
   filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.5));
 }
 .ri-lg {
   width: 64px;
   height: 64px;
   vertical-align: middle;
+  border-radius: 8px;
   filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.5));
 }
 
@@ -4510,21 +4720,24 @@ html, body {
   }
 
   .control-section {
-    height: 48px;
+    height: auto;
+    flex-wrap: wrap;
   }
 
   .status-bar {
-    flex: 2;
-    border-right: 2px solid var(--border-color);
-    border-bottom: none;
-    padding: 0 0.5rem;
+    flex: 1 1 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.25rem 0.5rem;
     overflow: hidden;
+    justify-content: space-around;
   }
 
   .action-bar {
-    flex: 0 0 auto;
+    flex: 1 1 100%;
+    justify-content: center;
     gap: 0.4rem;
-    padding: 0 0.5rem;
+    padding: 0.25rem 0.5rem;
   }
   
   .control-btn {
@@ -4538,12 +4751,9 @@ html, body {
     min-width: 0;
     gap: 0.3rem;
     white-space: nowrap;
-    overflow: hidden;
   }
 
   .status-item > span:not(.status-icon) {
-    overflow: hidden;
-    text-overflow: ellipsis;
     min-width: 0;
   }
 
@@ -4576,8 +4786,8 @@ html, body {
 /* ── Mobile: stack visual on top, event fills remaining height ── */
 @media (max-width: 768px) {
   .visual-section {
-    flex: 0 0 37vh !important;
-    height: 37vh !important;
+    flex: 0 0 35vh !important;
+    height: 35vh !important;
     aspect-ratio: auto !important;
     width: 100% !important;
     max-width: 100% !important;
@@ -4596,6 +4806,10 @@ html, body {
     overflow-y: auto !important;
     z-index: auto;
     justify-content: flex-start;
+  }
+
+  .control-section {
+    flex-shrink: 0 !important;
   }
 
   .daily-choices-grid {
@@ -4695,8 +4909,8 @@ html, body {
 /* ── Small phones ≤480px: reduce visual section, re-assert event in flow ── */
 @media (max-width: 480px) {
   .visual-section {
-    flex: 0 0 33vh !important;
-    height: 33vh !important;
+    flex: 0 0 30vh !important;
+    height: 30vh !important;
   }
 
   .event-section {
@@ -4708,6 +4922,10 @@ html, body {
     flex: 1 1 0 !important;
     min-height: 0 !important;
     overflow-y: auto !important;
+  }
+
+  .control-section {
+    flex-shrink: 0 !important;
   }
 
   .event-content {
@@ -5296,6 +5514,21 @@ html, body {
   overflow: hidden;
   text-overflow: ellipsis;
   text-align: center;
+}
+
+/* Alternate labels above/below on mobile to prevent overlap */
+@media (max-width: 768px) {
+  .route-stop-label {
+    font-size: 0.45rem;
+    max-width: 48px;
+  }
+
+  .route-stop:nth-child(even) .route-stop-label {
+    top: auto;
+    bottom: 100%;
+    margin-top: 0;
+    margin-bottom: 2px;
+  }
 }
 .route-stop.visited .route-stop-label,
 .route-stop.current .route-stop-label {

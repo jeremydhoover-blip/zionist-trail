@@ -789,10 +789,11 @@ class DailyDecision {
 
       const paceNames = { 1: 'Slow', 2: 'Normal', 3: 'Fast' };
       const currentPace = paceNames[this.gameState.pace] || 'Normal';
+      const currentRations = this.gameState.rations === ZionistH.RATIONS_BARE ? 'Bare Bones' : this.gameState.rations === ZionistH.RATIONS_MEAGER ? 'Meager' : 'Filling';
 
       paceRow.innerHTML = `
         <img src="${sprite}" alt="Travel party" class="pace-row-img" />
-        <span class="pace-row-text">Pace: <strong>${currentPace}</strong></span>
+        <span class="pace-row-text">Pace: <strong>${currentPace}</strong> | Rations: <strong>${currentRations}</strong></span>
       `;
       paceRow.style.cursor = 'pointer';
       paceRow.addEventListener('click', () => this.handleDailyChoice(paceChoice.id));

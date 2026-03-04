@@ -376,6 +376,11 @@ html, body {
   .party-selection-grid {
     grid-template-columns: 1fr;
   }
+
+  .party-candidate {
+    min-height: 260px;
+    padding: 1.2rem;
+  }
 }
 
 .party-candidate:hover {
@@ -2912,6 +2917,26 @@ html, body {
   #location-description {
     font-size: 1.2rem;
   }
+
+  .retro-btn.primary,
+  .action-btn.primary {
+    font-size: 1.2rem;
+    padding: 0.9rem 1.5rem;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .selection-actions {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  .party-candidate {
+    min-height: 340px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -2937,6 +2962,12 @@ html, body {
   .menu-btn, .retro-btn, .action-btn {
     padding: 1.2rem 2rem;
     font-size: 1.2rem;
+  }
+
+  .retro-btn.primary,
+  .action-btn.primary {
+    font-size: 1.1rem;
+    padding: 0.8rem 1rem;
   }
 }
 
@@ -4269,6 +4300,7 @@ html, body {
 .pace-row-img {
   height: 32px;
   width: auto;
+  border-radius: 6px;
   filter: drop-shadow(1px 1px 3px rgba(0,0,0,0.6));
 }
 
@@ -4356,6 +4388,9 @@ html, body {
   color: var(--text-accent);
   text-transform: uppercase;
   letter-spacing: 0.03em;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
 }
 
 /* Inline resource icons */
@@ -4471,36 +4506,50 @@ html, body {
 
 @media (max-width: 768px) {
   .event-section {
-    max-height: 45vh;
+    max-height: none;
   }
-  
+
   .control-section {
-    height: 45px;
-    flex-direction: column;
+    height: 48px;
   }
-  
+
   .status-bar {
-    flex: 1;
-    border-right: none;
-    border-bottom: 1px solid var(--border-color);
-    padding: 0.5rem;
+    flex: 2;
+    border-right: 2px solid var(--border-color);
+    border-bottom: none;
+    padding: 0 0.5rem;
+    overflow: hidden;
   }
-  
+
   .action-bar {
-    flex: 1;
-    gap: 0.5rem;
-    padding: 0.5rem;
+    flex: 0 0 auto;
+    gap: 0.4rem;
+    padding: 0 0.5rem;
   }
   
   .control-btn {
-    min-width: 60px;
-    padding: 0.4rem 0.8rem;
-    font-size: 0.8rem;
+    min-width: 50px;
+    padding: 0.4rem 0.6rem;
+    font-size: 0.75rem;
   }
   
   .status-item {
-    font-size: 0.9rem;
-    min-width: 50px;
+    font-size: 0.85rem;
+    min-width: 0;
+    gap: 0.3rem;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .status-item > span:not(.status-icon) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+  }
+
+  .status-item .ri {
+    width: 16px;
+    height: 16px;
   }
   
   .party-sprite img {
@@ -4524,27 +4573,87 @@ html, body {
   }
 }
 
+/* ── Mobile: stack visual on top, event fills remaining height ── */
+@media (max-width: 768px) {
+  .visual-section {
+    flex: 0 0 37vh !important;
+    height: 37vh !important;
+    aspect-ratio: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+  }
+
+  .event-section {
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    height: auto !important;
+    max-height: none !important;
+    flex: 1 1 0 !important;
+    min-height: 0 !important;
+    overflow-y: auto !important;
+    z-index: auto;
+    justify-content: flex-start;
+  }
+
+  .daily-choices-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .event-choice {
+    min-width: 0;
+  }
+}
+
 @media (max-width: 480px) {
   .event-section {
-    max-height: 50vh;
+    max-height: none;
   }
   
   .control-section {
-    height: 42px;
+    height: auto;
+    flex-wrap: wrap;
   }
   
   .status-bar {
-    justify-content: space-between;
+    flex: 1 1 100%;
+    justify-content: space-around;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.25rem 0.4rem;
+    overflow: hidden;
   }
   
   .status-item {
-    font-size: 0.8rem;
-    min-width: 45px;
+    font-size: 0.75rem;
+    min-width: 0;
+    gap: 0.25rem;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .status-item > span:not(.status-icon) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+  }
+
+  .status-item .ri {
+    width: 14px;
+    height: 14px;
+  }
+  
+  .action-bar {
+    flex: 1 1 100%;
+    justify-content: center;
+    padding: 0.25rem 0.4rem;
   }
   
   .control-btn {
-    min-width: 55px;
-    padding: 0.3rem 0.6rem;
+    min-width: 50px;
+    padding: 0.2rem 0.5rem;
   }
   
   .control-btn .btn-text {
@@ -4579,6 +4688,44 @@ html, body {
   .event-choice {
     font-size: 1rem;
     padding: 0.8rem 1rem;
+    min-width: 0;
+  }
+}
+
+/* ── Small phones ≤480px: reduce visual section, re-assert event in flow ── */
+@media (max-width: 480px) {
+  .visual-section {
+    flex: 0 0 33vh !important;
+    height: 33vh !important;
+  }
+
+  .event-section {
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    max-height: none !important;
+    flex: 1 1 0 !important;
+    min-height: 0 !important;
+    overflow-y: auto !important;
+  }
+
+  .event-content {
+    padding: 0.5rem 0.75rem;
+  }
+
+  .choices-container {
+    padding: 0.3rem 0.75rem;
+  }
+
+  #event-header h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .event-text,
+  .event-text p {
+    font-size: 1rem;
   }
 }
 
@@ -5183,6 +5330,7 @@ html, body {
   transform: translate(-50%, -75%);
   height: 30px;
   width: auto;
+  border-radius: 6px;
   z-index: 5;
   transition: left 1s ease;
   filter: drop-shadow(0 2px 3px rgba(0,0,0,0.8));
